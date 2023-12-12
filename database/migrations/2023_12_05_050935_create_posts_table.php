@@ -29,6 +29,7 @@ return new class extends Migration
             $table->boolean('status')->default(true);
             $table->integer('vacancy_count');
             $table->string('address');
+            $table->boolean('homeflag')->default(false);
             $table->timestamps();
         });
     }

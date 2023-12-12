@@ -54,6 +54,7 @@
                                         <th><strong>Trạng thái</strong></th>
                                         <th><strong>Vị trí</strong></th>
                                         <th><strong>Cấp menu</strong></th>
+                                        <th><strong>Tên Controller</strong></th>
                                         <th><strong>Link</strong></th>
                                         <th><strong>Tác vụ</strong></th>
                                     </tr>
@@ -73,6 +74,7 @@
                                         </td>
                                         <td>{{ $item->Position }}</td>
                                         <td>{{ $item->MenuOrder }}</td>
+                                        <td>{{ $item->ControllerName  }}</td>
                                         <td>{{ $item->Link }}</td>
                                         <td>
                                             <a href="{{ route('menu.show', ['menu' => $item->id]) }}" class="btn btn-success mdi mdi-face"></a>

@@ -7,6 +7,8 @@ use App\Http\Controllers\TrangchuController;
 use App\Http\Controllers\Admin\PostsController;
 use App\Http\Controllers\Admin\AdminController;
 use App\Http\Controllers\UserController;
+use App\Http\Controllers\ViecLamController;
+use App\Http\Controllers\TuyendungController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -22,6 +24,15 @@ use App\Http\Controllers\UserController;
 //     return view('welcome');
 // });
 Route::get('/',[TrangchuController::class, 'index'])->name('index');
+//phan tim kiem
+Route::get('/search', [TrangchuController::class, 'search'])->name('search');
+//phan viec lam
+Route::get('/vieclam',[ViecLamController::class, 'index'])->name('index');
+// Định nghĩa route cho chi tiết một việc làm
+Route::get('/vieclam/{id}', [ViecLamController::class, 'show'])->name('vieclam.show');
+//phần tuyển dụng
+Route::get('/tuyendung',[TuyendungController::class, 'index'])->name('index');
+
 Route::get('/login',[UserController::class, 'login'])->name('login');
 Route::post('/login',[UserController::class, 'postLogin'])->name('postLogin');
 Route::get('/logout', [UserController::class, 'logout'])->name('logout');

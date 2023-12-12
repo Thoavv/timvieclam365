@@ -1,6 +1,6 @@
 @extends('home.master')
 
-@section('Tctitle', 'Trang chủ')
+@section('Tctitle', 'Viêc làm')
 
 @section('main-content')
     <div class="header">
@@ -14,7 +14,7 @@
                     <div class="row">
                         <div class="col-md-12">
                             <h1>Tìm công việc phù hợp với cuộc sống của bạn</h1><br>
-                            <h2>Hơn<strong>9,000</strong> việc làm đang chờ đợi để khởi đầu sự nghiệp của bạn!</h2>
+                            <h2>Hơn<strong>12,000</strong> việc làm đang chờ đợi để khởi đầu sự nghiệp của bạn!</h2>
                             <div class="content" style="background-color: gainsboro;">
                                 <form method="" action="">
                                     <div class="row" style="margin-right: 0px; margin-left: -15px;">
@@ -77,32 +77,29 @@
 
                 jobListContainer.innerHTML = '';
                 currentJobs.forEach(post => {
-                    // Thêm điều kiện kiểm tra display_order
-                    if (post.display_order === 1) {
-                        jobListContainer.innerHTML += `<div class="job-list col-md-6">
-                    <div class="thumb">
-                        <a href="/vieclam/${post.id}"><img src="{{ asset('fe-assets') }}/${post.image}" alt=""></a>
-                    </div>
-                    <div class="job-list-content">
-                        <h4><a href="/vieclam/${post.id}">${post.title}</a>
-                            ${post.job_type == 1 ? '<span class="full-time">Full-Time</span>' : '<span class="full-time">Part-Time</span>'}
-                        </h4>
-                        <p>${post.summary}</p>
-                        <div class="job-tag">
-                            <div class="pull-left">
-                                <div class="meta-tag">
-                                    <span><a href="#"><i class="ti-brush"></i>${post.category_id}</a></span>
-                                    <span><i class="ti-location-pin"></i>${post.address}</span>
-                                    <span><i class="ti-time"></i>${post.published_at}</span>
+                    jobListContainer.innerHTML += `<div class="job-list col-md-6">
+                        <div class="thumb">
+                            <a href="#"><img src="{{ asset('fe-assets') }}/${post.image}" alt=""></a>
+                        </div>
+                        <div class="job-list-content">
+                            <h4><a href="#">${post.title}</a>
+                                ${post.job_type == 1 ? '<span class="full-time">Full-Time</span>' : '<span class="full-time">Part-Time</span>'}
+                            </h4>
+                            <p>${post.summary}</p>
+                            <div class="job-tag">
+                                <div class="pull-left">
+                                    <div class="meta-tag">
+                                        <span><a href="#"><i class="ti-brush"></i>${post.category_id}</a></span>
+                                        <span><i class="ti-location-pin"></i>${post.address}</span>
+                                        <span><i class="ti-time"></i>${post.published_at}</span>
+                                    </div>
+                                </div>
+                                <div class="pull-right">
+                                    <a href="#" class="btn btn-common btn-rm">More Detail</a>
                                 </div>
                             </div>
-                            <div class="pull-right">
-                                <a href="/vieclam/${post.id}" class="btn btn-common btn-rm">xem ngay</a>
-                            </div>
                         </div>
-                    </div>
-                </div>`;
-                    }
+                    </div>`;
                 });
 
                 const totalJobs = posts.length;
@@ -114,8 +111,7 @@
                 const totalPages = Math.ceil(totalJobs / jobsPerPage);
                 paginationContainer.innerHTML = '';
                 for (let i = 1; i <= totalPages; i++) {
-                    paginationContainer.innerHTML +=
-                        `<li class="${currentPage === i ? 'active' : ''}"><a href="#" onclick="changePage(${i})">${i}</a></li>`;
+                    paginationContainer.innerHTML += `<li class="${currentPage === i ? 'active' : ''}"><a href="#" onclick="changePage(${i})">${i}</a></li>`;
                 }
             }
 
@@ -174,15 +170,14 @@
                 // Thêm nội dung HTML cho kết quả
                 resultContainer.append(
                     '<div class="media">' +
-                    '<a class="pull-left" href="/vieclam/' + result.id + '">' +
+                    '<a class="pull-left" href="#">' +
                     '<img class="media-object" style="width: 60px;" src="{{ asset('fe-assets') }}/' + result
                     .image + '" alt="image">' +
                     '</a>' +
                     '<div class="media-body">' +
                     '<div style="display: flex; justify-content: space-between;">' +
                     '<div style="margin-right: 10px;">' +
-                    '<h6 class="media-heading" style="margin-top: 3px;"><a style="" href="/vieclam/' + result
-                    .id + '">' + result.title +
+                    '<h6 class="media-heading" style="margin-top: 3px;"><a style="" href="' + result.detail_link + '">' + result.title +
                     '</a></h6>' +
                     '<p style="color: #ff4f57;" >' + result.summary + '</p>' +
                     '</div>' +
@@ -231,46 +226,4 @@
             performSearch(keyword);
         });
     </script>
-    <!-- Featured Jobs Section Start -->
-    <section class="featured-jobs section" style="margin-top: -75px;">
-        <div class="container">
-            <h2 class="section-title">Việc làm nổi bật</h2>
-            <div class="row">
-                @foreach ($posts as $post)
-                    @if ($post->display_order == 2)
-                        <div class="col-md-4 col-sm-6 col-xs-12">
-                            <div class="featured-item">
-                                <div class="featured-wrap">
-                                    <div class="featured-inner">
-                                        <figure class="item-thumb">
-                                            <a class="hover-effect" href="{{ route('vieclam.show', [$post->id]) }}">
-                                                <img src="{{ asset('fe-assets') }}/{{ $post->image }}" alt="">
-                                            </a>
-                                        </figure>
-                                        <div class="item-body">
-                                            <h3 class="job-title"><a
-                                                    href="{{ route('vieclam.show', [$post->id]) }}">{{ $post->title }}</a>
-                                            </h3>
-                                            <div class="adderess"><i class="ti-location-pin"></i> {{ $post->address }}
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="item-foot">
-                                    <span><i class="ti-calendar"></i> </span>
-                                    <span><i class="ti-time"></i>
-                                        {{ $post->job_type == 1 ? 'Full Time' : 'Part Time' }}</span>
-                                    <div class="view-iocn">
-                                        <a href="{{ route('vieclam.show', [$post->id]) }}"><i
-                                                class="ti-arrow-right"></i></a>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    @endif
-                @endforeach
-            </div>
-        </div>
-    </section>
-
 @endsection

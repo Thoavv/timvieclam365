@@ -9,6 +9,6 @@ class Posts extends Model
 {
     protected $table = 'posts';
     protected $fillable = [
-        'title', 'summary', 'content', 'image', 'job_typeid', 'detail_link', 'display_order', 'post_typeid','authorid','posting_date','closing_date','status','vacancy_count', 'address'
+        'title', 'summary', 'content', 'image', 'job_typeid', 'detail_link', 'display_order', 'post_typeid','authorid','posting_date','closing_date','status','vacancy_count', 'address','homeflag'
     ];
 }

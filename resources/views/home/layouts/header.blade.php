@@ -20,34 +20,11 @@
                         <!-- Start Navigation List -->
                         <ul class="nav navbar-nav">
                             @foreach ($headerData as $menuItem)
-                                <li><a class="active" href="{{ $menuItem->ControllerName }}">
+                                <li><a class="active" href="/{{ $menuItem->ControllerName }}">
                                         {{ $menuItem->MenuName }}<i class="fa fa-angle"></i>
                                     </a>
                                 </li>
                             @endforeach
-                            {{-- <li>
-                                <a href="blog.html">
-                                    Blog <i class="fa fa-angle-down"></i>
-                                </a>
-                                <ul class="dropdown">
-                                    <li>
-                                        <a href="blog.html">
-                                            Blog - Right Sidebar
-                                        </a>
-                                    </li>
-                                    <li>
-                                        <a href="blog-left-sidebar.html">
-                                            Blog - Left Sidebar
-                                        </a>
-                                    </li>
-                                    <li><a href="blog-full-width.html">Blog - Full Width</a></li>
-                                    <li>
-                                        <a href="single-post.html">
-                                            Blog Single Post
-                                        </a>
-                                    </li>
-                                </ul>
-                            </li> --}}
                         </ul>
                         <ul class="nav navbar-nav navbar-right float-right">
 
@@ -71,7 +48,7 @@
                                                 Thông báo
                                             </a>
                                         </li>
-                                        <li><a class="text-center" href="blog-full-width.html">Mua gói đăng</a></li>
+                                        <li><a class="text-center" href="/goidang">Mua gói đăng</a></li>
                                         <li>
                                             <a class="text-center" href="{{ route('logout') }}" style="background: rgb(238, 88, 88)">
                                                 Đăng xuất
@@ -147,8 +124,6 @@
             </nav>
         </div>
         <!-- Header Section End -->
-
-
     </section>
     <!-- end intro section -->
 </div>
