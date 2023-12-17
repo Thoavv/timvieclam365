@@ -55,7 +55,6 @@
                                         <th><strong>Vị trí</strong></th>
                                         <th><strong>Cấp menu</strong></th>
                                         <th><strong>Tên Controller</strong></th>
-                                        <th><strong>Link</strong></th>
                                         <th><strong>Tác vụ</strong></th>
                                     </tr>
                                 </thead>
@@ -72,10 +71,9 @@
                                                 Ẩn
                                             @endif
                                         </td>
-                                        <td>{{ $item->Position }}</td>
                                         <td>{{ $item->MenuOrder }}</td>
+                                        <td>{{ $item->Levels }}</td>
                                         <td>{{ $item->ControllerName  }}</td>
-                                        <td>{{ $item->Link }}</td>
                                         <td>
                                             <a href="{{ route('menu.show', ['menu' => $item->id]) }}" class="btn btn-success mdi mdi-face"></a>
                                             <a href="{{ route('menu.edit', ['menu' => $item->id]) }}" class="btn btn-info"> <ion-icon name="eye-outline"></ion-icon>
@@ -92,8 +90,6 @@
                                     @empty
                                         <samp>chưa có dữ liệu</samp>
                                     @endforelse
-
-
                                     </tfoot>
                             </table>
                         </div>

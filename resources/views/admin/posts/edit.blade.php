@@ -78,19 +78,27 @@
                             </div>
 
                             <div class="form-group row">
-                                <label class="col-sm-3 text-end control-label col-form-label" for="status">Trạng thái</label>
+                                <label class="col-sm-3 text-end control-label col-form-label" for="status">Trạng thái:</label>
                                 <div class="col-md-9">
                                     <select class="form-select" id="status" name="status">
-                                        <option value="1" {{ $posts->status == 1 ? 'selected' : '' }}>Hiển thị</option>
+                                        <option value="2" {{ $posts->status == 2 ? 'selected' : '' }}>Đang chờ</option>
+                                        <option value="1" {{ $posts->status == 1 ? 'selected' : '' }}>Phê duyệt</option>
                                         <option value="0" {{ $posts->status == 0 ? 'selected' : '' }}>Ẩn</option>
                                     </select>
                                 </div>
                             </div>
-
-                            <!-- Thêm các trường khác tương tự cho vacancy_count, authorid, ... -->
+                            <div class="form-group row">
+                                <label class="col-sm-3 text-end control-label col-form-label" for="status">Hiển thị trang chủ:</label>
+                                <div class="col-md-9">
+                                    <select class="form-select" id="homeflag" name="homeflag">
+                                        <option value="1" {{ $posts->homeflag == 1 ? 'selected' : '' }}>Hiển thị</option>
+                                        <option value="0" {{ $posts->homeflag == 0 ? 'selected' : '' }}>Ẩn</option>
+                                    </select>
+                                </div>
+                            </div>
                         </div>
 
-                        <div class="border-top">
+                        <div class="border-top text-center">
                             <div class="card-body">
                                 <input type="submit" name="sua" class="btn btn-primary" value="Lưu lại">
                             </div>

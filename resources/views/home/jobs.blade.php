@@ -79,7 +79,7 @@
                 currentJobs.forEach(post => {
                     jobListContainer.innerHTML += `<div class="job-list col-md-6">
                         <div class="thumb">
-                            <a href="#"><img src="{{ asset('fe-assets') }}/${post.image}" alt=""></a>
+                            <a href="#"><img src="{{asset('storage') }}/${post.image}" alt="">${post.image}</a>
                         </div>
                         <div class="job-list-content">
                             <h4><a href="#">${post.title}</a>
@@ -95,7 +95,7 @@
                                     </div>
                                 </div>
                                 <div class="pull-right">
-                                    <a href="#" class="btn btn-common btn-rm">More Detail</a>
+                                    <a href="#" class="btn btn-common btn-rm">xem chi tiết</a>
                                 </div>
                             </div>
                         </div>

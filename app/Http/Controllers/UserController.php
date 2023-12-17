@@ -27,7 +27,6 @@ class UserController extends Controller
                 return redirect()->route('index')->with('success', 'Đăng nhập thành công.');
             }
         }
-
         // Nếu đăng nhập thất bại, chuyển hướng với thông báo lỗi
         return redirect()->route('login')->with('error', 'Đăng nhập thất bại. Vui lòng kiểm tra lại thông tin đăng nhập.');
     }

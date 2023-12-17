@@ -13,14 +13,11 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('menus', function (Blueprint $table) {
+        Schema::create('post_images', function (Blueprint $table) {
             $table->id();
-            $table->boolean('IsActive')->default(true);
-            $table->string('MenuName', 50);
-            $table->string('ControllerName', 50)->nullable();
-            $table->integer('Levels');
-            $table->integer('ParentID')->nullable();
-            $table->integer('MenuOrder')->nullable();
+            $table->string('image_name');
+            $table->foreignId('post_id');
+            $table->boolean('status');
             $table->timestamps();
         });
     }
@@ -32,6 +29,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('menus');
+        Schema::dropIfExists('post_images');
     }
 };

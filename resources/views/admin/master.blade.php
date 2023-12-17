@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html dir="ltr" lang="en">
+
 <head>
     <meta charset="utf-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
@@ -11,12 +12,40 @@
         content="Matrix Admin Lite Free Version is powerful and clean admin dashboard template, inpired from Bootstrap Framework" />
     <meta name="robots" content="noindex,nofollow" />
     <title>@yield('title')</title>
-    <!-- Favicon icon -->
     <link rel="icon" type="image/png" sizes="16x16" href="{{ asset('assets') }}/assets/images/logo9.png" />
     <link rel="stylesheet" href="{{ asset('assets') }}/assets/extra-libs/multicheck/multicheck.css" />
     <link href="{{ asset('assets') }}/assets/libs/datatables.net-bs4/css/dataTables.bootstrap4.css" rel="stylesheet" />
     <link href="{{ asset('assets') }}/dist/css/style.min.css" rel="stylesheet" />
+    <style>
+        select.form-select option[value="2"] {
+            background-color: lightblue;
+        }
+
+        select.form-select option[value="1"] {
+            background-color: lightgreen;
+        }
+
+        select.form-select option[value="0"] {
+            background-color: lightcoral;
+        }
+
+        .awaiting-approval {
+            background-color: yellow;
+            /* Màu cho trạng thái "Chờ phê duyệt" */
+        }
+
+        .approved {
+            background-color: green;
+            /* Màu cho trạng thái "Phê duyệt" */
+        }
+
+        .hidden {
+            background-color: red;
+            /* Màu cho trạng thái "Ẩn" */
+        }
+    </style>
 </head>
+
 <body>
     <div class="preloader">
         <div class="lds-ripple">

@@ -96,8 +96,6 @@ class MenuController extends Controller
             'Levels' => 'required|integer',
             'ParentID' => 'nullable|integer',
             'MenuOrder' => 'nullable|integer',
-            'Position' => 'required|integer',
-            'Link' => 'nullable|string|max:250',
             'IsActive' => 'required|boolean',
         ]);
 

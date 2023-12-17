@@ -1,8 +1,21 @@
 @extends('home.master')
-
 @section('Tctitle', 'Trang chủ')
-
 @section('main-content')
+<div class="row">
+    <div class="col-12">
+        @if (session('success'))
+            <div class="alert alert-success" role="alert">
+                {{ session('success') }}
+            </div>
+        @endif
+
+        @if (session('error'))
+            <div class="alert alert-danger" role="alert">
+                {{ session('error') }}
+            </div>
+        @endif
+    </div>
+</div>
     <div class="header">
         <!-- Start intro section -->
         <section id="intro" class="section-intro">
@@ -21,7 +34,7 @@
                                         <div class="col-md-11 col-sm-6">
                                             <div class="form-group">
                                                 <input class="form-control input-search-ajax" type="text"
-                                                    placeholder="Công việc/Từ khoá/Tên công ty">
+                                                    placeholder="Công việc/Từ khoá/Tên công ty/địa chỉ">
                                                 <div class="search-ajax-results"></div>
                                             </div>
                                         </div>
@@ -49,84 +62,53 @@
         <div class="container">
             <h2 class="section-title">Việc làm hấp dẫn</h2>
             <div class="row" id="job-list-container">
-                <!-- Danh sách việc làm sẽ được hiển thị ở đây bằng JavaScript -->
-            </div>
-            <div class="col-md-12">
-                <div class="showing pull-left">
-                    <span id="showing-info">Loading...</span>
-                </div>
-                <ul class="pagination pull-right" id="pagination">
-                    <!-- Các nút phân trang sẽ được thêm ở đây bằng JavaScript -->
-                </ul>
-            </div>
-        </div>
+                @foreach ($posts as $post)
+                    {{-- @if ($post->display_order == 1) --}}
+                        <div class="job-list col-md-11">
+                            <div class="thumb">
+                                <a href="{{ route('vieclam.show', [$post->id]) }}">
+                                    <img src="{{ asset('storage') }}/{{ $post->image }}">
+                                </a>
+                            </div>
+                            <div class="job-list-content">
+                                <h4>
 
-        <script>
-            const posts = {!! json_encode($posts) !!};
-            const jobsPerPage = 6;
-            let currentPage = 1;
+                                    <a href="{{ route('vieclam.show', [$post->id]) }}">{{ $post->title }}</a>
 
-            function displayJobs() {
-                const jobListContainer = document.getElementById('job-list-container');
-                const paginationContainer = document.getElementById('pagination');
-                const showingInfo = document.getElementById('showing-info');
-
-                const startIndex = (currentPage - 1) * jobsPerPage;
-                const endIndex = startIndex + jobsPerPage;
-                const currentJobs = posts.slice(startIndex, endIndex);
-
-                jobListContainer.innerHTML = '';
-                currentJobs.forEach(post => {
-                    // Thêm điều kiện kiểm tra display_order
-                    if (post.display_order === 1) {
-                        jobListContainer.innerHTML += `<div class="job-list col-md-6">
-                    <div class="thumb">
-                        <a href="/vieclam/${post.id}"><img src="{{ asset('fe-assets') }}/${post.image}" alt=""></a>
-                    </div>
-                    <div class="job-list-content">
-                        <h4><a href="/vieclam/${post.id}">${post.title}</a>
-                            ${post.job_type == 1 ? '<span class="full-time">Full-Time</span>' : '<span class="full-time">Part-Time</span>'}
-                        </h4>
-                        <p>${post.summary}</p>
-                        <div class="job-tag">
-                            <div class="pull-left">
-                                <div class="meta-tag">
-                                    <span><a href="#"><i class="ti-brush"></i>${post.category_id}</a></span>
-                                    <span><i class="ti-location-pin"></i>${post.address}</span>
-                                    <span><i class="ti-time"></i>${post.published_at}</span>
+                                    @if ($post->job_typeid == 1)
+                                        <span class="full-time">Full-Time</span>
+                                    @else
+                                        <span class="full-time">Part-Time</span>
+                                    @endif
+                                </h4>
+                                <p>{{ $post->summary }}</p>
+                                <div class="job-tag">
+                                    <div class="pull-left">
+                                        <div class="meta-tag">
+                                            <span>
+                                                <a href="browse-categories.html">
+                                                    <i class="ti-brush"></i>{{ $post->title }}
+                                                </a>
+                                            </span>
+                                            <span><i class="ti-location-pin"></i>{{ $post->address }}</span>
+                                            <span><i class="ti-time"></i></span>
+                                        </div>
+                                    </div>
+                                    <div class="pull-right">
+                                        <div class="icon">
+                                            <i class="ti-heart"></i>
+                                        </div>
+                                        <a href="{{ route('vieclam.show', [$post->id]) }}"
+                                            class="btn btn-common btn-rm">xem chi tiết</a>
+                                    </div>
                                 </div>
                             </div>
-                            <div class="pull-right">
-                                <a href="/vieclam/${post.id}" class="btn btn-common btn-rm">xem ngay</a>
-                            </div>
                         </div>
-                    </div>
-                </div>`;
-                    }
-                });
+                    {{-- @endif --}}
+                @endforeach
 
-                const totalJobs = posts.length;
-                const startJob = startIndex + 1;
-                const endJob = Math.min(endIndex, totalJobs);
-
-                showingInfo.innerHTML = `Showing ${startJob} - ${endJob} of ${totalJobs} Jobs`;
-
-                const totalPages = Math.ceil(totalJobs / jobsPerPage);
-                paginationContainer.innerHTML = '';
-                for (let i = 1; i <= totalPages; i++) {
-                    paginationContainer.innerHTML +=
-                        `<li class="${currentPage === i ? 'active' : ''}"><a href="#" onclick="changePage(${i})">${i}</a></li>`;
-                }
-            }
-
-            function changePage(pageNumber) {
-                currentPage = pageNumber;
-                displayJobs();
-            }
-
-            // Hiển thị trang đầu tiên khi trang web được tải
-            displayJobs();
-        </script>
+            </div>
+        </div>
     </section>
     <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
     <script type="text/javascript" src="{{ asset('fe-assets') }}/assets/js/material-kit.js"></script>
@@ -184,7 +166,8 @@
                     '<h6 class="media-heading" style="margin-top: 3px;"><a style="" href="/vieclam/' + result
                     .id + '">' + result.title +
                     '</a></h6>' +
-                    '<p style="color: #ff4f57;" >' + result.summary + '</p>' +
+                    '<p style="color: #ff4f57;" >' + result.summary + '</p>' + '<p style="color: #000;" >' +
+                    result.address + '</p>' +
                     '</div>' +
                     '<span style="width: 100px;" class="full-time">' + (result.job_type === 1 ? 'Full-Time' :
                         'Part-Time') + '</span>' +
@@ -236,8 +219,8 @@
         <div class="container">
             <h2 class="section-title">Việc làm nổi bật</h2>
             <div class="row">
-                @foreach ($posts as $post)
-                    @if ($post->display_order == 2)
+                @foreach ($posts2 as $post)
+                    {{-- @if ($post->display_order == 2) --}}
                         <div class="col-md-4 col-sm-6 col-xs-12">
                             <div class="featured-item">
                                 <div class="featured-wrap">
@@ -259,7 +242,7 @@
                                 <div class="item-foot">
                                     <span><i class="ti-calendar"></i> </span>
                                     <span><i class="ti-time"></i>
-                                        {{ $post->job_type == 1 ? 'Full Time' : 'Part Time' }}</span>
+                                        {{ $post->job_typeid == 1 ? 'Full Time' : 'Part Time' }}</span>
                                     <div class="view-iocn">
                                         <a href="{{ route('vieclam.show', [$post->id]) }}"><i
                                                 class="ti-arrow-right"></i></a>
@@ -267,7 +250,7 @@
                                 </div>
                             </div>
                         </div>
-                    @endif
+                    {{-- @endif --}}
                 @endforeach
             </div>
         </div>

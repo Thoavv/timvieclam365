@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Posts;
+use App\Models\PostImage;
+
 class ViecLamController extends Controller
 {
     public function index()
@@ -19,6 +21,9 @@ class ViecLamController extends Controller
         if (!$posts) {
             abort(404); // Hoặc xử lý theo cách khác nếu muốn
         }
-        return view('home.vieclamdetail', compact('posts'));
+        $pimg = PostImage::where('post_id', $id)
+                           ->where('status', 1)
+                           ->get();
+        return view('home.vieclamdetail', compact('posts','pimg'));
     }
 }

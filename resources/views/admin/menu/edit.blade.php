@@ -56,41 +56,27 @@
                             <div class="form-group row">
                                 <label class="col-sm-3 text-end control-label col-form-label" for="Levels">Cấp menu</label>
                                 <div class="col-md-9">
-                                    <input type="number" class="form-control" id="Levels" name="Levels" value="{{ $menu->Levels }}" required />
+                                    <input type="number" class="form-control" id="Levels" name="Levels" value="{{ $menu->Levels }}" required min="0" />
                                 </div>
                             </div>
 
                             <div class="form-group row">
                                 <label class="col-sm-3 text-end control-label col-form-label" for="ParentID">ID của Menu cha</label>
                                 <div class="col-md-9">
-                                    <input type="number" class="form-control" id="ParentID" name="ParentID" value="{{ $menu->ParentID }}" />
+                                    <input type="number" class="form-control" id="ParentID" name="ParentID" value="{{ $menu->ParentID }}" required min="0" />
                                 </div>
                             </div>
 
                             <div class="form-group row">
-                                <label class="col-sm-3 text-end control-label col-form-label" for="MenuOrder">Thứ tự Menu</label>
+                                <label class="col-sm-3 text-end control-label col-form-label" for="MenuOrder">Vị trí Menu</label>
                                 <div class="col-md-9">
-                                    <input type="number" class="form-control" id="MenuOrder" name="MenuOrder" value="{{ $menu->MenuOrder }}" />
-                                </div>
-                            </div>
-
-                            <div class="form-group row">
-                                <label class="col-sm-3 text-end control-label col-form-label" for="Position">Vị trí</label>
-                                <div class="col-md-9">
-                                    <input type="number" class="form-control" id="Position" name="Position" value="{{ $menu->Position }}" required />
-                                </div>
-                            </div>
-
-                            <div class="form-group row">
-                                <label class="col-sm-3 text-end control-label col-form-label" for="Link">Đường Link</label>
-                                <div class="col-md-9">
-                                    <input type="text" class="form-control" id="Link" name="Link" value="{{ $menu->Link }}" />
+                                    <input type="number" class="form-control" id="MenuOrder" name="MenuOrder" value="{{ $menu->MenuOrder }}" required min="0" />
                                 </div>
                             </div>
                         </div>
 
                         <div class="border-top">
-                            <div class="card-body">
+                            <div class="card-body text-center">
                                 <input type="submit" name="sua" class="btn btn-primary" value="Lưu lại">
                             </div>
                         </div>

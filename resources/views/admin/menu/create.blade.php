@@ -60,44 +60,26 @@
                                 <label class="col-sm-3 text-end control-label col-form-label" for="Levels">Cấp
                                     menu</label>
                                 <div class="col-md-9">
-                                    <input type="number" class="form-control" id="Levels" name="Levels" required />
+                                    <input type="number" class="form-control" id="Levels" name="Levels" required min="0" />
                                 </div>
                             </div>
 
                             <div class="form-group row">
-                                <label class="col-sm-3 text-end control-label col-form-label" for="ParentID">ID của Menu
+                                <label class="col-sm-3 text-end control-label col-form-label" for="ParentID" >ID của Menu
                                     cha</label>
                                 <div class="col-md-9">
-                                    <input type="number" class="form-control" id="ParentID" name="ParentID" />
+                                    <input type="number" class="form-control" id="ParentID" name="ParentID" required min="0"/>
                                 </div>
                             </div>
 
                             <div class="form-group row">
-                                <label class="col-sm-3 text-end control-label col-form-label" for="MenuOrder">Thứ tự
+                                <label class="col-sm-3 text-end control-label col-form-label" for="MenuOrder">Vị trí
                                     Menu</label>
                                 <div class="col-md-9">
-                                    <input type="number" class="form-control" id="MenuOrder" name="MenuOrder" />
+                                    <input type="number" class="form-control" id="MenuOrder" name="MenuOrder" required min="0" />
                                 </div>
                             </div>
-
-                            <div class="form-group row">
-                                <label class="col-sm-3 text-end control-label col-form-label" for="Position">Vị trí</label>
-                                <div class="col-md-9">
-                                    <input type="number" class="form-control" id="Position" name="Position" required />
-                                </div>
-                            </div>
-
-                            <div class="form-group row">
-                                <label class="col-sm-3 text-end control-label col-form-label" for="Link">Đường
-                                    Link</label>
-                                <div class="col-md-9">
-                                    <input type="text" class="form-control" id="Link" name="Link" />
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="border-top">
-                            <div class="card-body">
+                            <div class="card-body text-center">
                                 <input type="submit" name="them" class="btn btn-primary" value="Lưu lại">
                             </div>
                         </div>

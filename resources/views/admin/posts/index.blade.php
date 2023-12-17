@@ -3,13 +3,13 @@
 @section('main-content')
     <div class="row">
         <div class="col-12">
-            @if(session('success'))
+            @if (session('success'))
                 <div class="alert alert-success" role="alert">
                     {{ session('success') }}
                 </div>
             @endif
 
-            @if(session('error'))
+            @if (session('error'))
                 <div class="alert alert-danger" role="alert">
                     {{ session('error') }}
                 </div>
@@ -32,7 +32,7 @@
         </div>
     </div>
     <div class="container-fluid">
-        <a href="{{ route('posts.create') }}" class="btn btn-primary mb-2" ><i class="fas fa-table" ></i> Thêm mới</a>
+        <a href="{{ route('posts.create') }}" class="btn btn-primary mb-2"><i class="fas fa-table"></i> Thêm mới</a>
         <div class="row">
             <div class="col-12">
                 <div class="card">
@@ -43,17 +43,9 @@
                                 <thead>
                                     <tr>
                                         <th><strong>Tiêu đề</strong></th>
-                                        <th><strong>Trạng thái</strong></th>
-                                        {{-- <th><strong>Tác giả</strong></th>
-                                        <th><strong>Thể loại</strong></th> --}}
-                                        {{-- <th><strong>Loại công việc</strong></th> --}}
                                         <th><strong>Địa chỉ</strong></th>
-                                        {{-- <th><strong>Số điện thoại</strong></th> --}}
-                                        {{-- <th><strong>Ảnh</strong></th> --}}
                                         <th><strong>Số lượng tuyển</strong></th>
-                                        <th><strong>Vị trí</strong></th>
-                                        {{-- <th><strong>Số lượng tuyển dụng</strong></th> --}}
-                                        {{-- <th><strong>Ngày xuất bản</strong></th> --}}
+                                        <th><strong class="col-sm-3">Trạng thái</strong></th>
                                         <th><strong>Tác vụ</strong></th>
                                     </tr>
                                 </thead>
@@ -61,32 +53,63 @@
                                     @forelse ($posts as $item)
                                         <tr>
                                             <td>{{ $item->title }}</td>
-                                            <td>
-                                                @if($item->IsActive == 1)
-                                                    Hiển thị
-                                                @else
-                                                    Ẩn
-                                                @endif
-                                            </td>
-                                            {{-- <td>{{ optional($item->author)->name }}</td>
-                                            <td>{{ optional($item->category)->name }}</td> --}}
-                                            {{-- <td>{{ $item->job_type == 1 ? 'Full-Time' : 'Part-Time' }}</td> --}}
                                             <td>{{ $item->address }}</td>
-                                            {{-- <td>{{ $item->phone }}</td> --}}
-                                            {{-- <td><img src="{{ asset('fe-assets') }}/{{ $item->img }}" alt=""></td> --}}
-                                            <td>{{ $item->vacancy_count}}</td>
-                                            <td>{{ $item->position }}</td>
-                                            {{-- <td>{{ $item->vacancies }}</td> --}}
-                                            {{-- <td>{{ $item->published_at }}</td> --}}
+                                            <td>{{ $item->vacancy_count }}</td>
+                                            <td><form class="form-horizontal" method="post" action="{{ route('posts.update_status', ['post' => $item->id]) }}" id="updateForm">
+                                                @csrf
+                                                @method('PUT')
+
+                                                    <div class="col-sm-12">
+                                                        <div class="row">
+                                                            <div class="col-sm-8">
+                                                                @if ($item->status == 2)
+                                                                    <input type="hidden" name="original_status" value="{{ $item->status }}">
+                                                                    <select class="form-select status-select" style="background-color: lightblue;" name="status" id="statusSelect">
+                                                                        <option value="2"  {{ $item->status == 2 ? 'selected' : '' }}>Đang chờ</option>
+                                                                        <option value="1"  {{ $item->status == 1 ? 'selected' : '' }}>Phê duyệt</option>
+                                                                        <option value="0"  {{ $item->status == 0 ? 'selected' : '' }}>Ẩn</option>
+                                                                    </select>
+                                                                @elseif ($item->status == 1)
+                                                                    <input type="hidden" name="original_status" value="{{ $item->status }}">
+                                                                    <select style="background-color: lightgreen;" class="form-select status-select" name="status" id="statusSelect">
+                                                                        <option value="2" {{ $item->status == 2 ? 'selected' : '' }}>Đang chờ</option>
+                                                                        <option value="1" {{ $item->status == 1 ? 'selected' : '' }}>Phê duyệt</option>
+                                                                        <option value="0"  {{ $item->status == 0 ? 'selected' : '' }}>Ẩn</option>
+                                                                    </select>
+                                                                @elseif ($item->status == 0)
+                                                                    {{-- Giá trị hiện tại của status --}}
+                                                                    <input type="hidden" name="original_status" value="{{ $item->status }}">
+                                                                    <select style="background-color: lightcoral;" class="form-select status-select" name="status" id="statusSelect">
+                                                                        <option value="2" {{ $item->status == 2 ? 'selected' : '' }}>Đang chờ</option>
+                                                                        <option value="1"  {{ $item->status == 1 ? 'selected' : '' }}>Phê duyệt</option>
+                                                                        <option value="0"{{ $item->status == 0 ? 'selected' : '' }}>Ẩn</option>
+                                                                    </select>
+                                                                @endif
+                                                            </div>
+                                                            <div class="col-sm-4">
+                                                                <button type="submit" class="btn btn-primary" id="updateButton">
+                                                                    <i class="fa fa-save"></i>
+                                                                </button>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+
+                                                    </form>
+                                                </form>
+                                            </td>
                                             <td>
-                                                <a href="{{ route('posts.show', ['post' => $item->id]) }}" class="btn btn-success mdi mdi-face"></a>
-                                                <a href="{{ route('posts.edit', ['post' => $item->id]) }}" class="btn btn-info">
+                                                <a href="{{ route('posts.show', ['post' => $item->id]) }}"
+                                                    class="btn btn-success mdi mdi-face"></a>
+                                                <a href="{{ route('posts.edit', ['post' => $item->id]) }}"
+                                                    class="btn btn-info">
                                                     <ion-icon name="eye-outline"></ion-icon> Sửa
                                                 </a>
-                                                <form action="{{ route('posts.destroy', ['post' => $item->id]) }}" method="POST" style="display: inline;">
+                                                <form action="{{ route('posts.destroy', ['post' => $item->id]) }}"
+                                                    method="POST" style="display: inline;">
                                                     @csrf
                                                     @method('DELETE')
-                                                    <button type="submit" class="btn btn-danger" onclick="return confirm('Bạn có chắc chắn muốn xoá bài viết này không?')">
+                                                    <button type="submit" class="btn btn-danger"
+                                                        onclick="return confirm('Bạn có chắc chắn muốn xoá bài viết này không?')">
                                                         <ion-icon name="eye-outline"></ion-icon> Xoá
                                                     </button>
                                                 </form>

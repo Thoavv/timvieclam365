@@ -26,10 +26,11 @@ return new class extends Migration
             $table->integer('authorid');
             $table->date('posting_date');
             $table->date('closing_date');
-            $table->boolean('status')->default(true);
+            $table->integer('status');
             $table->integer('vacancy_count');
             $table->string('address');
-            $table->boolean('homeflag')->default(false);
+            $table->integer('homeflag');
+            $table->string('phone_number');
             $table->timestamps();
         });
     }

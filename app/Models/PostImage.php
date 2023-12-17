@@ -5,11 +5,11 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Menu extends Model
+class PostImage extends Model
 {
-    protected $table = 'menus';
+    protected $table = 'post_images';
 
     protected $fillable = [
-        'IsActive', 'MenuName', 'ControllerName', 'Levels', 'ParentID', 'MenuOrder',
+        'image_name', 'post_id', 'status',
     ];
 }

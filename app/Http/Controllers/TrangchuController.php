@@ -9,10 +9,21 @@ class TrangchuController extends Controller
 {
     public function index()
     {
-        // Lấy 12 bài viết mới nhất
-        // $posts = Posts::latest()->where('homeflag', true)->take(8)->get();
-        $posts =Posts::all();
-        return view('home.index', compact('posts'));
+        //hoặc orwhere
+        $posts = Posts::latest()
+        ->where('homeflag', true)
+        ->where('status', true)
+        ->where('display_order',1)
+        ->take(6)
+        ->get();
+        // $posts =Posts::all();
+        $posts2 = Posts::latest()
+        ->where('homeflag', true)
+        ->where('status', true)
+        ->where('display_order',2)
+        ->take(6)
+        ->get();
+        return view('home.index', compact('posts', 'posts2'));
     }
     public function search(Request $request)
     {
@@ -22,6 +33,7 @@ class TrangchuController extends Controller
         $results = Posts::where('title', 'like', "%$keyword%")
                         ->orWhere('summary', 'like', "%$keyword%")
                         ->orWhere('content', 'like', "%$keyword%")
+                        ->orWhere('address', 'like', "%$keyword%")
                         ->get();
 
         return response()->json($results);
