@@ -12,7 +12,7 @@
                             <span class="icon-bar"></span>
                             <span class="icon-bar"></span>
                         </button>
-                        <a class="navbar-brand logo" href="index.html"><img style="width: 250px"
+                        <a class="navbar-brand logo" href="/"><img style="width: 250px"
                                 src="{{ asset('fe-assets') }}/assets/img/logo3.png" alt=""></a>
                     </div>
 
@@ -38,7 +38,7 @@
                                     </a> --}}
                                     <ul class="dropdown" style="    background: #4caf50; ">
                                         <li>
-                                            <a class="text-center" chref="blog.html">
+                                            <a class="text-center" href="/account">
                                                 Hồ sơ tài khoản
                                             </a>
                                         </li>

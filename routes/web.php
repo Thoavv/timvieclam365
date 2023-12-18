@@ -11,6 +11,8 @@ use App\Http\Controllers\ViecLamController;
 use App\Http\Controllers\TuyendungController;
 use App\Http\Controllers\GoidangController;
 use App\Http\Controllers\GioithieuController;
+use App\Http\Controllers\Account\AccountController;
+use App\Http\Controllers\Account\DangtuyenController;
 
 /*
 |--------------------------------------------------------------------------
@@ -41,6 +43,8 @@ Route::get('/gioithieu', [GioithieuController::class, 'index'])->name('gioithieu
 Route::get('/login',[UserController::class, 'login'])->name('login');
 Route::post('/login',[UserController::class, 'postLogin'])->name('postLogin');
 Route::get('/logout', [UserController::class, 'logout'])->name('logout');
+Route::post('/change-password', [UserController::class, 'changePassword'])->name('change.password');
+Route::get('/change-password', [UserController::class, 'changePasswordForm'])->name('change.password.form');
 
 // Route::get('/register',[UserController::class, 'register'])->name('register');
 Route::post('/register',[UserController::class, 'postRegister'])->name('postRegister');
@@ -72,7 +76,10 @@ Route::prefix('admin')->middleware('admin')->group(function(){
 
     Route::resource('menu', MenuController::class);
     Route::resource('posts', PostsController::class);
-    Route::put('/posts/{post}/update-status', [PostsController::class, 'updateStatus'])
-    ->name('posts.update_status');
+    Route::put('/posts/{post}/update-status', [PostsController::class, 'updateStatus'])->name('posts.update_status');
 });
+
+//quan ly tài khoản cá nhân
+Route::get('/account', [AccountController::class, 'index'])->name('account');
+Route::resource('dangtuyen', DangtuyenController::class);
 

@@ -15,7 +15,8 @@ class UserController extends Controller
     {
         return view('home.login');
     }
-    public function postLogin(Request $request){
+    public function postLogin(Request $request)
+    {
         // dd($request->all());
         // Kiểm tra đăng nhập
         $credentials = $request->only('name', 'password');
@@ -60,6 +61,7 @@ class UserController extends Controller
                 'name' => $request->name,
                 'email' => $request->email,
                 'password' => $password,
+                'role_id' => 1,
             ]);
         } catch (\Throwable $exception) {
             // Xử lý ngoại lệ (ví dụ: ghi log hoặc chuyển hướng với thông báo lỗi)
@@ -69,8 +71,35 @@ class UserController extends Controller
         // Chuyển hướng đến trang đăng nhập với thông báo thành công
         return redirect()->route('login')->with('success', 'Đăng ký thành công. Bạn có thể đăng nhập ngay bây giờ.');
     }
-    public function logout(){
+    public function logout()
+    {
         Auth::logout();
         return redirect()->route('index')->with('success', 'Đăng xuất thành công.');
+    }
+    public function changePasswordForm()
+    {
+        return view('account.taikhoan.changepassword');
+    }
+    public function changePassword(Request $request)
+    {
+        // dd($request -> all());
+        $request->validate([
+            'current_password' => 'required',
+            'password' => 'required|string|min:6|confirmed',
+        ]);
+
+        $user = Auth::user();
+
+        // Kiểm tra mật khẩu hiện tại của người dùng
+        if (!Hash::check($request->current_password, $user->password)) {
+            return redirect()->route('change.password.form')->with('error', 'Mật khẩu hiện tại không chính xác.');
+        }
+
+        // Cập nhật mật khẩu mới
+        $data = (['password' => Hash::make($request->password),]);
+        /** @var \App\Models\User $user **/
+        $user->update($data);
+
+        return redirect()->route('change.password.form')->with('success', 'Đổi mật khẩu thành công.');
     }
 }
