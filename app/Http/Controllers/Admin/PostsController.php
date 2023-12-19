@@ -45,6 +45,7 @@ class PostsController extends Controller
             'address' => 'nullable|string|max:255',
             'homeflag' => 'nullable|integer',
             'phone_number' => 'nullable|string|max:20',
+            'end_date'=> 'nullable|date',
         ]);
 
         // Xử lý tải lên hình ảnh của bài viết
@@ -123,6 +124,7 @@ class PostsController extends Controller
             'address' => 'nullable|string|max:255',
             'homeflag' => 'nullable|integer',
             'phone_number' => 'nullable|string|max:20',
+            'end_date'=> 'nullable|date',
         ]);
 
         // Cập nhật bản ghi trong cơ sở dữ liệu

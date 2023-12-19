@@ -9,21 +9,12 @@ use App\Http\Controllers\Admin\AdminController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\ViecLamController;
 use App\Http\Controllers\TuyendungController;
-use App\Http\Controllers\GoidangController;
+use App\Http\Controllers\Account\GoidangController;
 use App\Http\Controllers\GioithieuController;
 use App\Http\Controllers\Account\AccountController;
 use App\Http\Controllers\Account\DangtuyenController;
-
-/*
-|--------------------------------------------------------------------------
-| Web Routes
-|--------------------------------------------------------------------------
-|
-| Here is where you can register web routes for your application. These
-| routes are loaded by the RouteServiceProvider within a group which
-| contains the "web" middleware group. Now create something great!
-|
-*/
+use App\Http\Controllers\Admin\OrderController;
+use App\Http\Controllers\Admin\UsersController;
 
 // Route::get('/', function () {
 //     return view('welcome');
@@ -39,7 +30,7 @@ Route::get('/vieclam/{id}', [ViecLamController::class, 'show'])->name('vieclam.s
 Route::get('/gioithieu', [GioithieuController::class, 'index'])->name('gioithieu');
 
 
-
+//phần đăng nhâp
 Route::get('/login',[UserController::class, 'login'])->name('login');
 Route::post('/login',[UserController::class, 'postLogin'])->name('postLogin');
 Route::get('/logout', [UserController::class, 'logout'])->name('logout');
@@ -51,6 +42,10 @@ Route::post('/register',[UserController::class, 'postRegister'])->name('postRegi
 
 //phần tuyển dụng
 Route::get('/goidang',[GoidangController::class, 'index'])->name('goidang');
+Route::get('thanhtoan/{id}',[GoidangController::class, 'pay'])->name('thanhtoan');
+Route::get('thanhtoanok/{id}',[GoidangController::class, 'payok'])->name('thanhtoanok');
+
+
 Route::get('/tuyendung',[TuyendungController::class, 'index'])->name('tuyendung');
 //check gói
 Route::middleware(['checkgoi'])->group(function (){
@@ -77,6 +72,8 @@ Route::prefix('admin')->middleware('admin')->group(function(){
     Route::resource('menu', MenuController::class);
     Route::resource('posts', PostsController::class);
     Route::put('/posts/{post}/update-status', [PostsController::class, 'updateStatus'])->name('posts.update_status');
+    Route::resource('order', OrderController::class);
+    Route::resource('users', UsersController::class);
 });
 
 //quan ly tài khoản cá nhân

@@ -31,6 +31,7 @@ return new class extends Migration
             $table->string('address');
             $table->integer('homeflag');
             $table->string('phone_number');
+            $table->date('end_date');
             $table->timestamps();
         });
     }

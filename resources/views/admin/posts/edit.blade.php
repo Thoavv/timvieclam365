@@ -64,16 +64,22 @@
                             </div>
 
                             <div class="form-group row">
-                                <label class="col-sm-3 text-end control-label col-form-label" for="posting_date">Ngày đăng</label>
+                                <label class="col-sm-3 text-end control-label col-form-label" for="posting_date">Ngày bắt đầu</label>
                                 <div class="col-md-9">
                                     <input type="date" class="form-control" id="posting_date" name="posting_date" value="{{ $posts->posting_date }}" required />
                                 </div>
                             </div>
 
                             <div class="form-group row">
-                                <label class="col-sm-3 text-end control-label col-form-label" for="closing_date">Ngày đóng</label>
+                                <label class="col-sm-3 text-end control-label col-form-label" for="closing_date">Ngày kết thúc</label>
                                 <div class="col-md-9">
                                     <input type="date" class="form-control" id="closing_date" name="closing_date" value="{{ $posts->closing_date }}" />
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                <label class="col-sm-3 text-end control-label col-form-label" for="end_date">Ngày hết hạn</label>
+                                <div class="col-md-9">
+                                    <input type="date" class="form-control" id="end_date" name="end_date" value="{{ $posts->end_date }}" />
                                 </div>
                             </div>
 

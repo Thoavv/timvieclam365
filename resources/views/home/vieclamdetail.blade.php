@@ -53,7 +53,7 @@
                     <div class="about-content">
                         <h2 class="medium-title">{{ $posts->title }}</h2>
                         <p class="desc">{{ $posts->content }}</p>
-                        <p class="desc">Số lượng tuyển:{{ $posts->vacancy_count }}</p>
+                        <p class="desc">Số lượng tuyển: {{ $posts->vacancy_count }}</p>
                         <a href="#" class="btn btn-common">Liên hệ ngay</a>
                     </div>
                 </div>

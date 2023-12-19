@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Account;
 
 use App\Http\Controllers\Controller;
+use App\Models\Order;
 use App\Models\PostImage;
 use App\Models\Posts;
 use Illuminate\Http\Request;
@@ -11,11 +12,6 @@ use Illuminate\Support\Facades\Storage;
 
 class DangtuyenController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
     public function index()
     {
         $id= Auth::user()->id;
@@ -23,24 +19,34 @@ class DangtuyenController extends Controller
         ->get();
         return view('account.dangtuyen.index', compact('post'));
     }
-
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
     public function create()
     {
-        return view('account.dangtuyen.create');
+        $id= Auth::user()->id;
+        $order = Order::where('user_id', $id)
+        ->where('status', 1)
+        ->first();
+        if($order)
+        {
+            $goid = Order::where('user_id', $id)
+            ->where('orders.status', 1)
+            ->join('package_storage', 'orders.package_id', '=', 'package_storage.id')
+            ->select('orders.*', 'package_storage.package_name', 'package_storage.duration')
+            ->get();
+            return view('account.dangtuyen.create',compact('goid'));
+        }
+        else{
+            return redirect()->route('goidang')->with('error', 'Bạn cần phải mua gói đăng trước nhé!');
+        }
     }
     public function store(Request $request)
     {
         // dd($request->all());
         $data = $request->validate([
+            'order_id'=>'nullable|integer',
             'title' => 'required|string|max:255',
             'summary' => 'nullable|string',
             'content' => 'nullable|string',
-            'image' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048', // Example validation for image uploads
+            'image' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
             'job_typeid' => 'nullable|integer',
             'detail_link' => 'nullable|string|max:255',
             'display_order' => 'nullable|integer',
@@ -54,6 +60,11 @@ class DangtuyenController extends Controller
             'homeflag' => 'nullable|integer',
             'phone_number' => 'nullable|string|max:20',
         ]);
+        //xử lý loại gói đăng bằng order_id = id
+        $order = Order::find($request->input('order_id'));
+        $order->update(['status' => 0]);
+
+
 
         // Xử lý tải lên hình ảnh của bài viết
         if ($request->hasFile('image')) {

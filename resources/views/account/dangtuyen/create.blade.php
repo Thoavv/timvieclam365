@@ -27,6 +27,17 @@
                                 <div class="card-body">
                                     <h4 class="card-title">Nhập thông tin bài viết</h4>
                                     <div class="form-group row">
+                                        <label class="col-sm-3 text-end control-label col-form-label" for="order_id">Chọn gói đăng:</label>
+                                        <div class="col-md-9">
+                                            <select class="select2 form-select shadow-none" id="order_id"
+                                                style="width: 100%; height: 36px" name="order_id">
+                                                @foreach ($goid as $item )
+                                                    <option value="{{ $item ->id }}">{{ $item ->package_name }}</option>
+                                                @endforeach
+                                            </select>
+                                        </div>
+                                    </div>
+                                    <div class="form-group row">
                                         <label class="col-sm-3 text-end control-label col-form-label" for="title">Tiêu đề:</label>
                                         <div class="col-md-9">
                                             <input type="text" class="form-control" id="title" name="title" required />

@@ -2,7 +2,7 @@
 <html lang="en">
 
 <head>
-    <title>Login 10</title>
+    <title>Đăng nhập</title>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
@@ -19,7 +19,7 @@
         <div class="container">
             <div class="row justify-content-center">
                 <div class="col-md-6 text-center mb-5">
-                    <h2 class="heading-section">Admin Login</h2>
+                    <h2 class="heading-section">Admin</h2>
                 </div>
             </div>
             <div class="row justify-content-center">
@@ -30,11 +30,11 @@
                         <form action="{{ route('postLogon') }}" method="POST" class="signin-form">
                             @csrf
                             <div class="form-group">
-                                <input type="text" class="form-control" placeholder="Username" name="name">
+                                <input type="text" class="form-control" placeholder="Tên tài khoản" name="name">
                             </div>
                             <div class="form-group">
                                 <input id="password-field" name="password" type="password" class="form-control"
-                                    placeholder="Password" required>
+                                    placeholder="Mật khẩu" required>
                                 <span toggle="#password-field"
                                     class="fa fa-fw fa-eye field-icon toggle-password"></span>
                             </div>
@@ -43,13 +43,13 @@
                             </div>
                             <div class="form-group d-md-flex">
                                 <div class="w-50">
-                                    <label class="checkbox-wrap checkbox-primary">Remember Me
+                                    <label class="checkbox-wrap checkbox-primary">Nhớ mật khẩu
                                         <input type="checkbox" checked>
                                         <span class="checkmark"></span>
                                     </label>
                                 </div>
                                 <div class="w-50 text-md-right">
-                                    <a href="#" style="color: #fff">Forgot Password</a>
+                                    <a href="#" style="color: #fff">Quên mật khẩu</a>
                                 </div>
                             </div>
                         </form>

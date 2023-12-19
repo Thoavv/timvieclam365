@@ -67,7 +67,7 @@
                         <div class="job-list col-md-11">
                             <div class="thumb">
                                 <a href="{{ route('vieclam.show', [$post->id]) }}">
-                                    <img src="{{ asset('storage') }}/{{ $post->image }}">
+                                    <img style="width: 120px" src="{{ asset('storage') }}/{{ $post->image }}">
                                 </a>
                             </div>
                             <div class="job-list-content">

@@ -9,7 +9,7 @@
                     <div class="row justify-content-center">
                         <div class="col-md-8">
                             <div class="card">
-                                <div class="card-header">{{ __('Thay đổi mật khẩu') }}</div>
+                                <div class="card-header">Thay đổi mật khẩu</div>
                                 <div class="card-body">
                                     @if (session('error'))
                                         <div class="alert alert-danger" role="alert">
@@ -27,19 +27,19 @@
                                         @csrf
 
                                         <div class="form-group">
-                                            <label for="current_password">{{ __('Mật khẩu cũ') }}</label>
+                                            <label for="current_password">Mật khẩu cũ</label>
                                             <input id="current_password" type="password" class="form-control"
                                                 name="current_password" required>
                                         </div>
 
                                         <div class="form-group">
-                                            <label for="password">{{ __('Mật khẩu mới') }}</label>
+                                            <label for="password">Mật khẩu mới</label>
                                             <input id="password" type="password" class="form-control" name="password"
                                                 required>
                                         </div>
 
                                         <div class="form-group">
-                                            <label for="password_confirmation">{{ __('xác thực mật khẩu mới') }}</label>
+                                            <label for="password_confirmation">xác thực mật khẩu mới</label>
                                             <input id="password_confirmation" type="password" class="form-control"
                                                 name="password_confirmation" required>
                                         </div>

@@ -102,6 +102,12 @@
                                 </div>
                             </div>
                             <div class="form-group row">
+                                <label class="col-sm-3 text-end control-label col-form-label" for="end_date">Ngày hết hạn</label>
+                                <div class="col-md-9">
+                                    <input type="date" name="end_date" required>
+                                </div>
+                            </div>
+                            <div class="form-group row">
                                 <label class="col-sm-3 text-end control-label col-form-label" for="status">Trạng
                                     thái:</label>
                                 <div class="col-md-9">

@@ -35,9 +35,9 @@
                 </li>
 
                 <li class="sidebar-item">
-                    <a class="sidebar-link waves-effect waves-dark sidebar-link" href="#"
+                    <a class="sidebar-link waves-effect waves-dark sidebar-link" href="{{ route('order.index') }}"
                         aria-expanded="false"><i class="mdi mdi-relative-scale"></i>
-                        <span class="hide-menu">Thuộc tính công việc</span>
+                        <span class="hide-menu">Đơn hàng đăng tuyển</span>
                     </a>
                 </li>
                 <li class="sidebar-item">

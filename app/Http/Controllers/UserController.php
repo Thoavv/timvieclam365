@@ -87,14 +87,11 @@ class UserController extends Controller
             'current_password' => 'required',
             'password' => 'required|string|min:6|confirmed',
         ]);
-
         $user = Auth::user();
-
         // Kiểm tra mật khẩu hiện tại của người dùng
         if (!Hash::check($request->current_password, $user->password)) {
             return redirect()->route('change.password.form')->with('error', 'Mật khẩu hiện tại không chính xác.');
         }
-
         // Cập nhật mật khẩu mới
         $data = (['password' => Hash::make($request->password),]);
         /** @var \App\Models\User $user **/
