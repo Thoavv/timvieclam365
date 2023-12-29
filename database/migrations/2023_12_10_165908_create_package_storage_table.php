@@ -20,6 +20,7 @@ return new class extends Migration
             $table->integer('duration');
             $table->string('description');
             $table->boolean('status');
+            $table->integer('homeflag');
             $table->timestamps();
         });
     }

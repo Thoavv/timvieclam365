@@ -15,20 +15,10 @@
                             <a href="{{ route('menu.index') }}" class="sidebar-link"><i class="mdi mdi-note-outline">
                                 </i><span class="hide-menu"> Quản lý memu</span></a>
                         </li>
-                        {{-- <li class="sidebar-item">
-                            <a href="#" class="sidebar-link"><i class="mdi mdi-note-plus"></i>
-                                <span class="hide-menu"> Quản lý banner </span>
-                            </a>
-                        </li> --}}
-                        <li class="sidebar-item">
-                            <a href="{{ route('posts.index') }}" class="sidebar-link"><i class="mdi mdi-note-plus"></i>
-                                <span class="hide-menu"> quản lý bài viết </span>
-                            </a>
-                        </li>
                     </ul>
                 </li>
                 <li class="sidebar-item">
-                    <a class="sidebar-link waves-effect waves-dark sidebar-link" href="#"
+                    <a class="sidebar-link waves-effect waves-dark sidebar-link" href="{{ route('users.index') }}"
                         aria-expanded="false"><i class="mdi mdi-face"></i>
                         <span class="hide-menu">Quản lý tài khoản</span>
                     </a>
@@ -52,59 +42,32 @@
                             </a>
                         </li>
                         <li class="sidebar-item">
-                            <a href="#" class="sidebar-link"><i class="mdi mdi-emoticon-cool"></i>
+                            <a href="{{ route('posts.index') }}" class="sidebar-link"><i class="mdi mdi-emoticon-cool"></i>
                                 <span class="hide-menu"> Danh sách bài đăng </span>
+
+                            </a>
+                        </li>
+                        <li class="sidebar-item">
+                            <a href="{{ route('posts.create') }}" class="sidebar-link"><i class="mdi mdi-emoticon-cool"></i>
+                                <span class="hide-menu"> Thêm mới bài đăng</span>
                             </a>
                         </li>
                     </ul>
                 </li>
                 <li class="sidebar-item">
-                    <a class="sidebar-link waves-effect waves-dark sidebar-link" href="#"
-                        aria-expanded="false"><i class="mdi mdi-pencil"></i>
-                        <span class="hide-menu">Quản lý ngành nghề</span>
-                    </a>
-                </li>
-                <li class="sidebar-item">
-                    <a class="sidebar-link waves-effect waves-dark sidebar-link" href="#"
-                        aria-expanded="false"><i class="mdi mdi-pencil"></i>
-                        <span class="hide-menu">Quản lý ứng viên</span>
-                    </a>
-                </li>
-                <li class="sidebar-item">
-                    <a class="sidebar-link waves-effect waves-dark sidebar-link" href="#"
-                        aria-expanded="false"><i class="mdi mdi-pencil"></i>
-                        <span class="hide-menu">Quản lý nhà tuyển dụng</span>
-                    </a>
-                </li>
-                <li class="sidebar-item">
                     <a class="sidebar-link has-arrow waves-effect waves-dark" href="javascript:void(0)"
-                        aria-expanded="false"><i class="mdi mdi-move-resize-variant"></i>
-                        <span class="hide-menu">Addons </span>
+                        aria-expanded="false"><i class="mdi mdi-calendar-check"></i>
+                        <span class="hide-menu">Quản lý gói đăng</span>
                     </a>
                     <ul aria-expanded="false" class="collapse first-level">
                         <li class="sidebar-item">
-                            <a href="#" class="sidebar-link"><i class="mdi mdi-view-dashboard"></i>
-                                <span class="hide-menu"> Dashboard-2 </span>
+                            <a href="{{ route('packagestorage.index') }}" class="sidebar-link"><i class="mdi mdi-view-dashboard"></i>
+                                <span class="hide-menu"> Danh sách gói đăng </span>
                             </a>
                         </li>
                         <li class="sidebar-item">
-                            <a href="#" class="sidebar-link"><i class="mdi mdi-multiplication-box"></i>
-                                <span class="hide-menu"> Gallery </span>
-                            </a>
-                        </li>
-                        <li class="sidebar-item">
-                            <a href="#" class="sidebar-link"><i class="mdi mdi-calendar-check"></i>
-                                <span class="hide-menu"> Calendar </span>
-                            </a>
-                        </li>
-                        <li class="sidebar-item">
-                            <a href="#" class="sidebar-link"><i class="mdi mdi-bulletin-board"></i>
-                                <span class="hide-menu"> Invoice </span>
-                            </a>
-                        </li>
-                        <li class="sidebar-item">
-                            <a href="#" class="sidebar-link"><i class="mdi mdi-message-outline"></i>
-                                <span class="hide-menu"> Chat Option </span>
+                            <a href="{{ route('packagestorage.create') }}" class="sidebar-link"><i class="mdi mdi-multiplication-box"></i>
+                                <span class="hide-menu"> Thêm mới gói đăng </span>
                             </a>
                         </li>
                     </ul>
@@ -112,21 +75,21 @@
                 <li class="sidebar-item">
                     <a class="sidebar-link has-arrow waves-effect waves-dark" href="javascript:void(0)"
                         aria-expanded="false"><i class="mdi mdi-account-key"></i>
-                        <span class="hide-menu">Authentication </span>
+                        <span class="hide-menu">{{ Auth::user()->name }} </span>
                     </a>
                     <ul aria-expanded="false" class="collapse first-level">
                         <li class="sidebar-item">
-                            <a href="authentication-login.html" class="sidebar-link"><i
+                            <a href="{{ route('singout') }}" class="sidebar-link"><i
                                     class="mdi mdi-all-inclusive"></i>
-                                <span class="hide-menu"> Login </span>
+                                <span class="hide-menu"> Đăng xuất </span>
                             </a>
                         </li>
-                        <li class="sidebar-item">
+                        {{-- <li class="sidebar-item">
                             <a href="authentication-register.html" class="sidebar-link"><i
                                     class="mdi mdi-all-inclusive"></i>
                                 <span class="hide-menu"> Register </span>
                             </a>
-                        </li>
+                        </li> --}}
                     </ul>
                 </li>
             </ul>

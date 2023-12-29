@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Models\Notifications;
 use Illuminate\Http\Request;
 use App\Models\Posts;
 use App\Models\PostImage;
@@ -134,28 +135,17 @@ class PostsController extends Controller
     }
     public function destroy($id)
     {
-        // Lấy bài viết cần xóa với id
         $ps = Posts::find($id);
-        //kiểm tra xem bài viết có có tồn tại không
         if (!$ps) {
             return redirect()->route('posts.index')->with('error', 'Bài viết không tồn tại.');
         }
-        // Lấy danh sách hình ảnh liên quan
         $images = PostImage::where('post_id', $ps->id)->get();
-
-        // Kiểm tra xem có hình ảnh để xử lý hay không
         if ($images->isNotEmpty()) {
-        // Xoá từng hình ảnh
         foreach ($images as $image) {
-            // Xoá hình ảnh từ đĩa lưu trữ
             Storage::delete('public/' . $image->filename);
-
-            // Xoá hình ảnh từ cơ sở dữ liệu
             $image->delete();
             }
         }
-
-        // Xóa menu
         $ps->delete();
 
         // Chuyển hướng sau khi xóa
@@ -165,7 +155,39 @@ class PostsController extends Controller
     {
         // dd($request->all());
         $post->update(['status' => $request->input('status')]);
+        if ($request->input('status') == 1) {
+            $authorId = $post->authorid;
+            $pt = $post ->id;
+                $ntcn = Notifications::create([
+                    'title' => 'Thông báo có bài viết đã được phê duyệt',
+                    'user_id' => 1,
+                    'receiver_id' => $authorId,
+                    'post_id' => $pt,
+                    'order_id' => 0,
+                    'message' => 'OK',
+                    'status' => 1,
+                    'candidates_id'=>0,
+                    'differentiate'=>0,
+                ]);
+        }
+        if ($request->input('status') == 0) {
+            $authorId = $post->authorid;
+            $pt = $post ->id;
+                $ntcn = Notifications::create([
+                    'title' => 'Thông báo có bài viết không được phê duyệt',
+                    'user_id' => 1,
+                    'receiver_id' => $authorId,
+                    'post_id' => $pt,
+                    'order_id' => 0,
+                    'message' => 'Đang chờ',
+                    'status' => 1,
+                    'candidates_id'=>0,
+                    'differentiate'=>0,
+                ]);
+        }
+
         // Chuyển hướng hoặc trả về phản hồi tùy thuộc vào logic của bạn
         return redirect()->route('posts.index')->with('success', 'Trạng thái đã được cập nhật thành công.');
     }
+
 }

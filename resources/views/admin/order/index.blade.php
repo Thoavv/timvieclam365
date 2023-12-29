@@ -1,5 +1,5 @@
 @extends('admin.master')
-@section('title', 'Quản đơn gói đang')
+@section('title', 'Quản đơn hàng đăng tuyển')
 @section('main-content')
     <div class="row">
         <div class="col-12">
@@ -19,7 +19,7 @@
     <div class="page-breadcrumb">
         <div class="row">
             <div class="col-12 d-flex no-block align-items-center">
-                <h4 class="page-title">Quản lý bài viết</h4>
+                <h4 class="page-title">Quản lý đơn hàng đăng tuyển</h4>
                 <div class="ms-auto text-end">
                     <nav aria-label="breadcrumb">
                         <ol class="breadcrumb">
@@ -37,7 +37,7 @@
             <div class="col-12">
                 <div class="card">
                     <div class="card-body">
-                        <h5 class="card-title">Danh sách bài viết</h5>
+                        <h5 class="card-title">Danh sách đơn hàng đăng tuyển</h5>
                         <div class="table-responsive">
                             <table id="zero_config" class="table table-striped table-bordered">
                                 <thead>
@@ -53,9 +53,9 @@
                                     @forelse ($order as $item)
                                         <tr>
                                             <td>{{ $item->package_id }}</td>
-                                            <td>{{ $item->user_id }}</td>
+                                            <td>{{ $item->user_name }}</td>
                                             <td>{{ $item->post_id }}</td>
-                                            <td><form class="form-horizontal" method="post" action="{{ route('posts.update_status', ['post' => $item->id]) }}" id="updateForm">
+                                            <td><form class="form-horizontal" method="post" action="{{ route('order.update_status', ['order' => $item->id]) }}" id="updateForm">
                                                 @csrf
                                                 @method('PUT')
 
@@ -98,21 +98,8 @@
                                                 </form>
                                             </td>
                                             <td>
-                                                <a href="{{ route('posts.show', ['post' => $item->id]) }}"
+                                                <a href="{{ route('order.show', ['order' => $item->id]) }}"
                                                     class="btn btn-success mdi mdi-face"></a>
-                                                <a href="{{ route('posts.edit', ['post' => $item->id]) }}"
-                                                    class="btn btn-info">
-                                                    <ion-icon name="eye-outline"></ion-icon> Sửa
-                                                </a>
-                                                <form action="{{ route('posts.destroy', ['post' => $item->id]) }}"
-                                                    method="POST" style="display: inline;">
-                                                    @csrf
-                                                    @method('DELETE')
-                                                    <button type="submit" class="btn btn-danger"
-                                                        onclick="return confirm('Bạn có chắc chắn muốn xoá bài viết này không?')">
-                                                        <ion-icon name="eye-outline"></ion-icon> Xoá
-                                                    </button>
-                                                </form>
                                             </td>
                                         </tr>
                                     @empty

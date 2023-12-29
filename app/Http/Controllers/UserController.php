@@ -44,18 +44,13 @@ class UserController extends Controller
             'email' => 'required|email|unique:users|max:255',
             'password' => 'required|string|min:6|confirmed',
         ]);
-
         // Nếu kiểm tra hợp lệ thất bại, chuyển hướng với thông báo lỗi và dữ liệu nhập trước đó
         if ($validator->fails()) {
             return redirect()->route('register')
                 ->withErrors($validator)
                 ->withInput();
         }
-
-        // Mã hóa mật khẩu
         $password = Hash::make($request->password);
-
-        // Thử tạo người dùng mới
         try {
             User::create([
                 'name' => $request->name,
@@ -67,7 +62,6 @@ class UserController extends Controller
             // Xử lý ngoại lệ (ví dụ: ghi log hoặc chuyển hướng với thông báo lỗi)
             return redirect()->route('register')->with('error', 'Đăng ký thất bại. Vui lòng thử lại.');
         }
-
         // Chuyển hướng đến trang đăng nhập với thông báo thành công
         return redirect()->route('login')->with('success', 'Đăng ký thành công. Bạn có thể đăng nhập ngay bây giờ.');
     }
@@ -99,4 +93,5 @@ class UserController extends Controller
 
         return redirect()->route('change.password.form')->with('success', 'Đổi mật khẩu thành công.');
     }
+
 }

@@ -15,5 +15,6 @@ class PackageStorage extends Model
         'duration',
         'description',
         'status',
+        'homeflag',
     ];
 }

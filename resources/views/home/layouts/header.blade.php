@@ -25,31 +25,69 @@
                                     </a>
                                 </li>
                             @endforeach
+                            {{-- thông báo --}}
+
+
                         </ul>
                         <ul class="nav navbar-nav navbar-right float-right">
                             {{-- <li class="left"><a href="post-job.html"><i class="ti-pencil-alt"></i> </a></li> --}}
                             @if (Auth::check())
+                                @if (count($Notifications_Data->where('receiver_id', Auth::id())) > 0)
+                                    <li style="margin-left: 100px ">
+                                        <a class="notification-icon"  href="#">
+                                            🔔<span style="background: #ff0000;" class="badge">
+                                                @php
+                                                    $notificationCount = 0;
+                                                @endphp
+
+                                                @foreach ($Notifications_Data as $ntf)
+                                                    @if ($ntf->receiver_id == Auth::id())
+                                                        @php
+                                                            $notificationCount++;
+                                                        @endphp
+                                                    @endif
+                                                @endforeach
+
+                                                {{ $notificationCount > 0 ? $notificationCount : '' }}
+                                            </span>
+                                        </a>
+                                        <ul>
+                                            @php
+                                                $notificationCount = 0;
+                                            @endphp
+                                            @foreach ($Notifications_Data as $ntf)
+                                                @if ($ntf->receiver_id == Auth::id())
+                                                    @if ($notificationCount < 5)
+                                                        <li><a  style="background: rgb(238, 88, 88)"
+                                                                href="{{ route('thongbao.show', ['thongbao' => $ntf->id]) }}">{{ $ntf->title }}</a>
+                                                        </li>
+                                                        @php
+                                                            $notificationCount++;
+                                                        @endphp
+                                                    @endif
+                                                @endif
+                                            @endforeach
+                                        </ul>
+                                    </li>
+                                @endif
                                 <li>
                                     <a>
+
                                         {{ Auth::user()->name }}<i class="fa fa-angle-down"></i>
                                     </a>
                                     {{-- <a>
                                         {{ Auth::user()->id }}<i class="fa fa-angle-down"></i>
                                     </a> --}}
-                                    <ul class="dropdown" style="    background: #4caf50; ">
+                                    <ul class="dropdown" style="background: #4caf50; ">
                                         <li>
                                             <a class="text-center" href="/account">
                                                 Hồ sơ tài khoản
                                             </a>
                                         </li>
-                                        <li>
-                                            <a class="text-center" href="blog-left-sidebar.html">
-                                                Thông báo
-                                            </a>
-                                        </li>
                                         <li><a class="text-center" href="/goidang">Mua gói đăng</a></li>
                                         <li>
-                                            <a class="text-center" href="{{ route('logout') }}" style="background: rgb(238, 88, 88)">
+                                            <a class="text-center" href="{{ route('logout') }}"
+                                                style="background: rgb(238, 88, 88)">
                                                 Đăng xuất
                                             </a>
                                         </li>
@@ -64,25 +102,25 @@
                         </ul>
                     </div>
                 </div>
+
                 <!-- Mobile Menu Start -->
                 <ul class="wpb-mobile-menu">
                     @foreach ($headerData as $menuItem)
-                    <li>
-                        <a class="active" href="/{{ $menuItem->ControllerName }}">{{ $menuItem->MenuName }}</a>
-                    </li>
+                        <li>
+                            <a class="active" href="/{{ $menuItem->ControllerName }}">{{ $menuItem->MenuName }}</a>
+                        </li>
                     @endforeach
                     {{-- logohay --}}
                     {{-- <li class="btn-m"><a href="post-job.html"><i class="ti-pencil-alt"></i> Post A Job</a></li> --}}
                     @if (Auth::check())
-                    <li>
-                        <a href="">{{ Auth::user()->name }}</a>
-                        <ul>
-                            <li><a href="about.html">About</a></li>
-                            <li><a href="job-page.html">Job Page</a></li>
-                            <li><a href="job-details.html">Job Details</a></li>
-                            <li><a href="{{ route('logout') }}">Đăng xuất</a></li>
-                        </ul>
-                    </li>
+                        <li>
+                            <a href="">{{ Auth::user()->name }}</a>
+                            <ul>
+                                <li><a href="/account">Hồ sơ tài khoản</a></li>
+                                <li><a href="/goidang">Mua gói đăng</a></li>
+                                <li><a href="{{ route('logout') }}">Đăng xuất</a></li>
+                            </ul>
+                        </li>
                     @else
                         <li class="btn-m"><a href="{{ route('login') }}"><i class="ti-lock"></i>Đăng nhập</a></li>
                     @endif

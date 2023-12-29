@@ -4,23 +4,25 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Posts;
+use Carbon\Carbon;
 
 class TrangchuController extends Controller
 {
     public function index()
     {
+        $currentDate = Carbon::now()->toDateString();
         //hoặc orwhere
         $posts = Posts::latest()
-        ->where('homeflag', true)
-        ->where('status', true)
-        ->where('display_order',1)
+        ->where('homeflag', 1)
+        ->where('status', 1)
+        ->whereDate('end_date', '>=', $currentDate)
         ->take(6)
         ->get();
         // $posts =Posts::all();
         $posts2 = Posts::latest()
-        ->where('homeflag', true)
-        ->where('status', true)
-        ->where('display_order',2)
+        ->where('homeflag', 2)
+        ->where('status', 1)
+        ->whereDate('end_date', '>=', $currentDate)
         ->take(6)
         ->get();
         return view('home.index', compact('posts', 'posts2'));
@@ -28,8 +30,6 @@ class TrangchuController extends Controller
     public function search(Request $request)
     {
         $keyword = $request->input('keyword');
-
-        // Sử dụng query builder để tìm kiếm trong bảng posts
         $results = Posts::where('title', 'like', "%$keyword%")
                         ->orWhere('summary', 'like', "%$keyword%")
                         ->orWhere('content', 'like', "%$keyword%")

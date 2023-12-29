@@ -4,8 +4,11 @@ namespace App\Http\Controllers\Account;
 
 use App\Http\Controllers\Controller;
 use App\Models\Order;
+use App\Models\PackageStorage;
 use App\Models\PostImage;
 use App\Models\Posts;
+use App\Models\Notifications;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Storage;
@@ -14,27 +17,25 @@ class DangtuyenController extends Controller
 {
     public function index()
     {
-        $id= Auth::user()->id;
+        $id = Auth::user()->id;
         $post = Posts::where('authorid', $id)
-        ->get();
+            ->get();
         return view('account.dangtuyen.index', compact('post'));
     }
     public function create()
     {
-        $id= Auth::user()->id;
+        $id = Auth::user()->id;
         $order = Order::where('user_id', $id)
-        ->where('status', 1)
-        ->first();
-        if($order)
-        {
+            ->where('status', 1)
+            ->first();
+        if ($order) {
             $goid = Order::where('user_id', $id)
-            ->where('orders.status', 1)
-            ->join('package_storage', 'orders.package_id', '=', 'package_storage.id')
-            ->select('orders.*', 'package_storage.package_name', 'package_storage.duration')
-            ->get();
-            return view('account.dangtuyen.create',compact('goid'));
-        }
-        else{
+                ->where('orders.status', 1)
+                ->join('package_storage', 'orders.package_id', '=', 'package_storage.id')
+                ->select('orders.*', 'package_storage.package_name', 'package_storage.duration')
+                ->get();
+            return view('account.dangtuyen.create', compact('goid'));
+        } else {
             return redirect()->route('goidang')->with('error', 'Bạn cần phải mua gói đăng trước nhé!');
         }
     }
@@ -42,7 +43,7 @@ class DangtuyenController extends Controller
     {
         // dd($request->all());
         $data = $request->validate([
-            'order_id'=>'nullable|integer',
+            'order_id' => 'nullable|integer',
             'title' => 'required|string|max:255',
             'summary' => 'nullable|string',
             'content' => 'nullable|string',
@@ -62,10 +63,19 @@ class DangtuyenController extends Controller
         ]);
         //xử lý loại gói đăng bằng order_id = id
         $order = Order::find($request->input('order_id'));
-        $order->update(['status' => 0]);
-
-
-
+        // Lấy giá trị duration thông qua package_id
+        $package = PackageStorage::where('id', $order->package_id)->first();
+        $duration = $package->duration;
+        $hlg = $package->homeflag;
+        // Lấy ngày hiện tại
+        $currentDate = Carbon::now();
+        // Tính toán end_date bằng cách thêm duration vào ngày hiện tại
+        $endDate = $currentDate->addDays($duration);
+        // Cập nhật trạng thái và end_date
+        $order->update([
+            'status' => 0,
+            'end_date' => $endDate,
+        ]);
         // Xử lý tải lên hình ảnh của bài viết
         if ($request->hasFile('image')) {
             $image = $request->file('image');
@@ -77,7 +87,37 @@ class DangtuyenController extends Controller
         }
 
         // Tạo bài viết mới với dữ liệu đã kiểm tra
-        $post = Posts::create($data);
+        $post = Posts::create([
+            'title' => $data['title'],
+            'summary' => $data['summary'],
+            'content' => $data['content'],
+            'image' => $data['image'],
+            'job_typeid' => $data['job_typeid'],
+            'detail_link' => $data['detail_link'],
+            'display_order' => $data['display_order'],
+            'post_typeid' => $data['post_typeid'],
+            'authorid' => $data['authorid'],
+            'posting_date' => $data['posting_date'],
+            'closing_date' => $data['closing_date'],
+            'status' => $data['status'],
+            'vacancy_count' => $data['vacancy_count'],
+            'address' => $data['address'],
+            'homeflag' => $hlg,
+            'phone_number' => $data['phone_number'],
+            'end_date' => $endDate, // Thêm end_date vào bài viết
+        ]);
+        $ntcn = Notifications::create([
+            'title'=> 'Thông báo có bài viết chờ xử lý',
+            'user_id' => $data['authorid'],
+            'receiver_id'=> 1,
+            'post_id'=> $post->id,
+            'order_id'=>0,
+            'message'=>'Đang chờ',
+            'status'=>1,
+            'candidates_id'=>0,
+            'differentiate'=>0,
+        ]);
+
 
         // Xử lý tải lên nhiều hình ảnh và lưu chúng vào bảng post_images
         if ($request->hasFile('images')) {
@@ -117,11 +157,9 @@ class DangtuyenController extends Controller
     {
         // Kiểm tra xem bản ghi có tồn tại hay không
         $post = Posts::find($id);
-
         if (!$post) {
-            return redirect()->route('posts.index')->with('error', 'Bài viết không tồn tại.');
+            return redirect()->route('dangtuyen.index')->with('error', 'Bài viết không tồn tại.');
         }
-
         // Xử lý dữ liệu từ form
         $data = $request->validate([
             'title' => 'required|string|max:255',
@@ -147,34 +185,30 @@ class DangtuyenController extends Controller
 
         return redirect()->route('dangtuyen.index')->with('success', 'Bài viết đã được cập nhật thành công.');
     }
-
     public function destroy($id)
     {
-         // Lấy bài viết cần xóa với id
-         $ps = Posts::find($id);
-         //kiểm tra xem bài viết có có tồn tại không
-         if (!$ps) {
-             return redirect()->route('dangtuyen.index')->with('error', 'Bài viết không tồn tại.');
-         }
-         // Lấy danh sách hình ảnh liên quan
-         $images = PostImage::where('post_id', $ps->id)->get();
+        // Lấy bài viết cần xóa với id
+        $ps = Posts::find($id);
+        //kiểm tra xem bài viết có có tồn tại không
+        if (!$ps) {
+            return redirect()->route('dangtuyen.index')->with('error', 'Bài viết không tồn tại.');
+        }
+        // Lấy danh sách hình ảnh liên quan
+        $images = PostImage::where('post_id', $ps->id)->get();
+        // Kiểm tra xem có hình ảnh để xử lý hay không
+        if ($images->isNotEmpty()) {
+            // Xoá từng hình ảnh
+            foreach ($images as $image) {
+                // Xoá hình ảnh từ đĩa lưu trữ
+                Storage::delete('public/' . $image->filename);
+                // Xoá hình ảnh từ cơ sở dữ liệu
+                $image->delete();
+            }
+        }
+        // Xóa menu
+        $ps->delete();
 
-         // Kiểm tra xem có hình ảnh để xử lý hay không
-         if ($images->isNotEmpty()) {
-         // Xoá từng hình ảnh
-         foreach ($images as $image) {
-             // Xoá hình ảnh từ đĩa lưu trữ
-             Storage::delete('public/' . $image->filename);
-
-             // Xoá hình ảnh từ cơ sở dữ liệu
-             $image->delete();
-             }
-         }
-
-         // Xóa menu
-         $ps->delete();
-
-         // Chuyển hướng sau khi xóa
-         return redirect()->route('dangtuyen.index')->with('success', 'Bài viết đã được xoá thành công.');
+        // Chuyển hướng sau khi xóa
+        return redirect()->route('dangtuyen.index')->with('success', 'Bài viết đã được xoá thành công.');
     }
 }

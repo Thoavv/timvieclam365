@@ -1,9 +1,8 @@
 <?php
-
 namespace App\Http\Controllers\Account;
-
 use App\Http\Controllers\Controller;
 use App\Models\Posts;
+use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
@@ -16,9 +15,12 @@ class AccountController extends Controller
      */
     public function index()
     {
+        return view('account.index');
+    }
+    public function profile()
+    {
         $id= Auth::user()->id;
-        $posts = Posts::where('authorid', $id)
-        ->get();
-        return view('account.index', compact('posts'));
+        $user = User::find($id);
+        return view('account.profile', compact('user'));
     }
 }

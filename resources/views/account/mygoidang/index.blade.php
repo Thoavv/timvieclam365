@@ -1,5 +1,5 @@
 @extends('account.master')
-@section('titleaccount', 'Danh sách bài đăng tuyển dụng')
+@section('titleaccount', 'Danh sách gói đăng của bạn')
 @section('main-content')
 <div class="main-container">
     <div class="pd-ltr-20">
@@ -18,43 +18,43 @@
             </div>
         </div>
         <div class="card-box mb-30">
-            <h2 class="h4 pd-20">Danh sách bài đăng tuyển dụng của bạn</h2>
+            <h2 class="h4 pd-20">Danh sách gói đăng tuyển dụng của bạn</h2>
             <div class="table-responsive">
                 <table class="data-table table nowrap col-lg-8 col-xl-12">
                     <thead>
                         <tr>
-                            <th class="table-plus datatable-nosort ">Tiêu đề</th>
-                            <th>Khu vực</th>
-                            <th>Số lượng</th>
-                            <th>Số ngày đóng</th>
+                            <th class="table-plus datatable-nosort ">Tên gói</th>
+                            <th>giá </th>
+                            <th>Thời gian</th>
+                            <th>Mô tả   </th>
                             <th>Trạng thái</th>
                             <th class="datatable-nosort">Công cụ</th>
                         </tr>
                     </thead>
                     <tbody>
-                        @forelse ($post as $item)
+                        @forelse ($orders as $item)
                             <tr>
-                                <td>{{ $item->title }}</td>
-                                <td>{{ $item->address }}</td>
-                                <td>{{ $item->vacancy_count }}</td>
-                                <td>{{ $item->end_date }}</td>
+                                <td>{{ $item->package_name }}</td>
+                                <td>{{ $item->price }}</td>
+                                <td>{{ $item->duration }}</td>
+                                <td>{{ $item->description }}</td>
                                 <td>
                                     @if ($item->status == 2)
                                         <p style="background-color: lightblue;" >Đang chờ</p>
                                     @elseif ($item->status == 1)
-                                        <p style="background-color: lightgreen;" >Phê duyệt</p>
-                                    @elseif ($item->status == 0)
-                                        <p style="background-color: lightcoral;">Ẩn</p>
+                                        <p style="background-color: lightgreen;" >Đã mua</p>
+                                    {{-- @elseif ($item->status == 2)
+                                        <p style="background-color: lightcoral;">Ẩn</p> --}}
                                     @endif
                                 </td>
                                 <td>
-                                    <a style="background-color: lightgreen;" href="{{ route('dangtuyen.show', ['dangtuyen' => $item->id]) }}"
-                                        class="btn icon-copy ion-social-octocat"></a>
-                                    <a href="{{ route('dangtuyen.edit', ['dangtuyen' => $item->id]) }}"
+                                    {{-- <a style="background-color: lightgreen;" href="{{ route('dangtuyen.show', ['dangtuyen' => $item->id]) }}"
+                                        class="btn icon-copy ion-social-octocat"></a> --}}
+                                    <a href="dangtuyen/create"
                                         class="btn btn-info">
-                                        <ion-icon name="eye-outline"></ion-icon> Sửa
+                                        <ion-icon name="eye-outline"></ion-icon> Sử dụng
                                     </a>
-                                    <form action="{{ route('dangtuyen.destroy', ['dangtuyen' => $item->id]) }}"
+                                    {{-- <form action="{{ route('dangtuyen.destroy', ['dangtuyen' => $item->id]) }}"
                                         method="POST" style="display: inline;">
                                         @csrf
                                         @method('DELETE')
@@ -62,7 +62,7 @@
                                             onclick="return confirm('Bạn có chắc chắn muốn xoá bài viết này không?')">
                                             <ion-icon name="eye-outline"></ion-icon> Xoá
                                         </button>
-                                    </form>
+                                    </form> --}}
                                 </td>
                             </tr>
                         @empty

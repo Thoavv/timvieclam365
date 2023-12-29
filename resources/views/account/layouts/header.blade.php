@@ -39,6 +39,7 @@
             </form>
         </div>
     </div>
+    @if (Auth::check())
     <div class="header-right">
         <div class="dashboard-setting user-notification">
             <div class="dropdown">
@@ -51,52 +52,43 @@
             <div class="dropdown">
                 <a class="dropdown-toggle no-arrow" href="#" role="button" data-toggle="dropdown">
                     <i class="icon-copy dw dw-notification"></i>
-                    <span class="badge notification-active"></span>
+                    <span style="color: #ff0000;" class="badge">
+                        @php
+                            $notificationCount = 0; // Biến đếm thông báo
+                        @endphp
+
+                        @foreach ($Notifications_Data as $ntf)
+                            @if ($ntf->receiver_id == Auth::id())
+                                @php
+                                    $notificationCount++;
+                                @endphp
+                            @endif
+                        @endforeach
+
+                        {{ $notificationCount > 0 ? $notificationCount : '' }}
+                    </span>
                 </a>
                 <div class="dropdown-menu dropdown-menu-right">
                     <div class="notification-list mx-h-350 customscroll">
                         <ul>
                             <li>
-                                <a href="#">
-                                    <img src="{{ asset('vendors') }}/images/img.jpg" alt="">
-                                    <h3>John Doe</h3>
-                                    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed...</p>
-                                </a>
-                            </li>
-                            <li>
-                                <a href="#">
-                                    <img src="{{ asset('vendors') }}/images/photo1.jpg" alt="">
-                                    <h3>Lea R. Frith</h3>
-                                    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed...</p>
-                                </a>
-                            </li>
-                            <li>
-                                <a href="#">
-                                    <img src="{{ asset('vendors') }}/images/photo2.jpg" alt="">
-                                    <h3>Erik L. Richards</h3>
-                                    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed...</p>
-                                </a>
-                            </li>
-                            <li>
-                                <a href="#">
-                                    <img src="{{ asset('vendors') }}/images/photo3.jpg" alt="">
-                                    <h3>John Doe</h3>
-                                    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed...</p>
-                                </a>
-                            </li>
-                            <li>
-                                <a href="#">
-                                    <img src="{{ asset('vendors') }}/images/photo4.jpg" alt="">
-                                    <h3>Renee I. Hansen</h3>
-                                    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed...</p>
-                                </a>
-                            </li>
-                            <li>
-                                <a href="#">
-                                    <img src="{{ asset('vendors') }}/images/img.jpg" alt="">
-                                    <h3>Vicki M. Coleman</h3>
-                                    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed...</p>
-                                </a>
+                                @php
+                                        $notificationCount = 0;
+                                    @endphp
+                                @foreach ($Notifications_Data as $ntf)
+                                    @if ($ntf->receiver_id == Auth::id())
+                                        @if ($notificationCount < 5)
+                                            <a href="{{ route('thongbao.show', ['thongbao' => $ntf->id]) }}">
+                                                <h3>{{ $ntf->title }}</h3>
+                                                <p></p>
+                                            </a>
+                                            @php
+                                                    $notificationCount++;
+                                                @endphp
+                                        @endif
+                                    @endif
+                                @endforeach
+
                             </li>
                         </ul>
                     </div>
@@ -112,18 +104,32 @@
                     <span class="user-name">{{ Auth::user()->name }}</span>
                 </a>
                 <div class="dropdown-menu dropdown-menu-right dropdown-menu-icon-list">
-                    <a class="dropdown-item" href="profile"><i class="dw dw-user1"></i>Thông tin tài khoản</a>
-                    <a class="dropdown-item" href="change-password"><i class="dw dw-settings2"></i>Thay đổi mật khẩu</a>
+                    <a class="dropdown-item" href="/profile"><i class="dw dw-user1"></i>Thông tin tài khoản</a>
+                    <a class="dropdown-item" href="/change-password"><i class="dw dw-settings2"></i>Thay đổi mật khẩu</a>
                     <a class="dropdown-item" href="{{ route('logout') }}"><i class="dw dw-logout"></i>Đăng xuất</a>
                 </div>
             </div>
         </div>
         <div class="github-link">
-            <a href="https://github.com/dropways/deskapp" target="_blank"><img src="{{ asset('vendors') }}/images/github.svg" alt=""></a>
+            <a href="https://github.com/dropways/deskapp" target="_blank"><img
+                    src="{{ asset('vendors') }}/images/github.svg" alt=""></a>
         </div>
     </div>
+    @else
+    <div class="user-notification">
+        <div class="dropdown">
+            <a class="btn btn-light" href="{{ route('login') }}"  >
+                Đăng nhập
+            </a>
+            <div class="dropdown-menu dropdown-menu-right">
+                <div class="notification-list mx-h-350 customscroll">
+                    <ul>
+                        <li>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+@endif
 </div>
-
-
-
-

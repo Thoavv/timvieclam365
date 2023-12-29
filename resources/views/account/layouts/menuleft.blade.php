@@ -17,9 +17,17 @@
                     </a>
                 </li>
                 <li class="dropdown">
-                    <a href="goidang" class="dropdown-toggle">
+                    {{-- <a href="goidang" class="dropdown-toggle">
+                        <span class="micon dw  ion-plus-circled "></span><span class="mtext">Gói đăng</span>
+                    </a> --}}
+                    <a href="javascript:;" class="dropdown-toggle">
                         <span class="micon dw  ion-plus-circled "></span><span class="mtext">Gói đăng</span>
                     </a>
+                    <ul class="submenu">
+
+                        <li><a href="/goidang">Mua gói đăng</a></li>
+                        <li><a href="/mygoidang">Gói đăng của bạn</a></li>
+                    </ul>
                 </li>
                 <li class="dropdown">
                     <a href="javascript:;" class="dropdown-toggle">
@@ -27,9 +35,9 @@
                     </a>
                     <ul class="submenu">
 
-                        <li><a href="dangtuyen">Quản lý bài đăng tuyển dụng</a></li>
-                        <li><a href="advanced-components.html">Danh sách ứng viên</a></li>
-                        <li><a href="dangtuyen/create">Thêm mới bài đăng</a></li>
+                        <li><a href="/dangtuyen">Quản lý bài đăng tuyển dụng</a></li>
+                        {{-- <li><a href="ungvien">Danh sách ứng viên</a></li> --}}
+                        <li><a href="/dangtuyen/create">Thêm mới bài đăng</a></li>
                     </ul>
                 </li>
                 <li class="dropdown">
@@ -37,8 +45,8 @@
                         <span class="micon dw ion-compose"></span><span class="mtext">Ứng viên</span>
                     </a>
                     <ul class="submenu">
-                        <li><a href="basic-table.html">Danh sách CV của bạn</a></li>
-                        <li><a href="datatable.html">Thêm mới cv</a></li>
+                        <li><a href="/ungvien">Danh sách CV của bạn</a></li>
+                        {{-- <li><a href="datatable.html">Thêm mới cv</a></li> --}}
                     </ul>
                 </li>
                 <li class="dropdown">
@@ -46,7 +54,7 @@
                         <span class="micon dw ion-android-person"></span><span class="mtext">Tài khoản</span>
                     </a>
                     <ul class="submenu">
-                        <li><a href="ui-buttons.html">Thông tin tài khoản</a></li>
+                        <li><a href="/profile">Thông tin tài khoản</a></li>
                         <li><a href="change-password">Đổi mật khẩu</a></li>
                         <li><a href="">thêm</a></li>
                     </ul>

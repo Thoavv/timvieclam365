@@ -1,7 +1,7 @@
 <!doctype html>
 <html lang="en">
   <head>
-  	<title>Login 10</title>
+  	<title>Đăng nhập</title>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
@@ -17,21 +17,36 @@
 		<div class="container">
 			<div class="row justify-content-center">
 				<div class="col-md-6 text-center mb-5">
-					<h2 class="heading-section">Trang đăng nhập</h2>
+					{{-- <h2 class="heading-section">Trang đăng nhập</h2> --}}
 				</div>
 			</div>
 			<div class="row justify-content-center">
+                <div class="row">
+                    <div class="col-12">
+                        @if (session('success'))
+                            <div class="alert alert-success" role="alert">
+                                {{ session('success') }}
+                            </div>
+                        @endif
+
+                        @if (session('error'))
+                            <div class="alert alert-danger" role="alert">
+                                {{ session('error') }}
+                            </div>
+                        @endif
+                    </div>
+                </div>
 				<div class="col-md-6 col-lg-4">
 					<div class="login-wrap p-0">
-                <a href="{{ route('register') }}" style="color: #fff"><h2 class="mb-4 text-center" style="color: #fff">Bạn chưa có tài khoản</h2>
+                <a href="{{ route('register') }}" style="color: #fff"><h2 class="mb-4 text-center" style="color: #fff">Tạo tài khoản !</h2>
                 </a>
                 <form action="{{ route('postLogin') }}" method="POST" class="signin-form">
                     @csrf
 		      		<div class="form-group">
-		      			<input type="text" class="form-control" placeholder="Username" name="name">
+		      			<input type="text" class="form-control" placeholder="Tên tài khoản" name="name">
 		      		</div>
 	            <div class="form-group">
-	              <input id="password-field" name="password" type="password" class="form-control" placeholder="Password" required>
+	              <input id="password-field" name="password" type="password" class="form-control" placeholder="Mật khẩu" required>
 	              <span toggle="#password-field" class="fa fa-fw fa-eye field-icon toggle-password"></span>
 	            </div>
 	            <div class="form-group">
@@ -49,7 +64,7 @@
 								</div>
 	            </div>
 	          </form>
-	          <p class="w-100 text-center">&mdash; Đăng nhập bằng tài khoản &mdash;</p>
+	          <p class="w-100 text-center">&mdash; Đăng nhập bằng tài khoản  &mdash;</p>
 	          <div class="social d-flex text-center">
 	          	<a href="#" class="px-2 py-2 mr-md-1 rounded"><span class="ion-logo-facebook mr-2"></span> Facebook</a>
 	          	<a href="#" class="px-2 py-2 ml-md-1 rounded"><span class="ion-logo-twitter mr-2"></span> Twitter</a>

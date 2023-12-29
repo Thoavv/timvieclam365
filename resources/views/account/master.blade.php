@@ -24,7 +24,7 @@
     @include('account.layouts.menuleft')
 	<div class="mobile-menu-overlay"></div>
     @yield('main-content')
-	@include('account.layouts.footer')
+	{{-- @include('account.layouts.footer') --}}
 	<!-- js -->
 	<script src="{{ asset('vendors') }}/scripts/core.js"></script>
 	<script src="{{ asset('vendors') }}/scripts/script.min.js"></script>

@@ -8,7 +8,6 @@
                 {{ session('success') }}
             </div>
         @endif
-
         @if (session('error'))
             <div class="alert alert-danger" role="alert">
                 {{ session('error') }}
@@ -64,7 +63,7 @@
             <div class="row" id="job-list-container">
                 @foreach ($posts as $post)
                     {{-- @if ($post->display_order == 1) --}}
-                        <div class="job-list col-md-11">
+                        <div class="job-list col-md-12">
                             <div class="thumb">
                                 <a href="{{ route('vieclam.show', [$post->id]) }}">
                                     <img style="width: 120px" src="{{ asset('storage') }}/{{ $post->image }}">
@@ -95,11 +94,11 @@
                                         </div>
                                     </div>
                                     <div class="pull-right">
-                                        <div class="icon">
-                                            <i class="ti-heart"></i>
+                                        <div class="icon" style="width: 90px; background-color: rgba(255, 255, 255, 0.5);">
+                                            <span class="like-count">{{ $post->like_pt }}</span>
+                                            <i class="ti-heart" style="cursor: pointer;"></i>
                                         </div>
-                                        <a href="{{ route('vieclam.show', [$post->id]) }}"
-                                            class="btn btn-common btn-rm">xem chi tiết</a>
+                                        <a href="{{ route('vieclam.show', [$post->id]) }}" class="btn btn-common btn-rm">xem chi tiết</a>
                                     </div>
                                 </div>
                             </div>
@@ -157,7 +156,7 @@
                 resultContainer.append(
                     '<div class="media">' +
                     '<a class="pull-left" href="/vieclam/' + result.id + '">' +
-                    '<img class="media-object" style="width: 60px;" src="{{ asset('fe-assets') }}/' + result
+                    '<img class="media-object" style="width: 60px;" src="{{ asset('storage') }}/' + result
                     .image + '" alt="image">' +
                     '</a>' +
                     '<div class="media-body">' +
@@ -227,7 +226,7 @@
                                     <div class="featured-inner">
                                         <figure class="item-thumb">
                                             <a class="hover-effect" href="{{ route('vieclam.show', [$post->id]) }}">
-                                                <img src="{{ asset('fe-assets') }}/{{ $post->image }}" alt="">
+                                                <img src="{{ asset('storage') }}/{{ $post->image }}" alt="">
                                             </a>
                                         </figure>
                                         <div class="item-body">

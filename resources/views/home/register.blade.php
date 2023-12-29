@@ -36,10 +36,10 @@
             </div>
             <div class="row justify-content-center">
                 <div class="col-md-6 col-lg-4">
-                    <a href="{{ route('login') }}" style="color: #fff"><h2 class="mb-4 text-center" style="color: #fff">Tôi đã có tài khoản</h2>
+                    <a href="{{ route('login') }}" style="color: #fff"><h2 class="mb-4 text-center" style="color: #fff">Bạn đã có tài khoản</h2>
                     </a>
                     <div class="login-wrap p-0">
-                        <h2 class="mb-4 text-center heading-section">Điền thông tin vào nhanh</h2>
+                        <h2 class="mb-4 text-center heading-section">Điền thông tin của bạn</h2>
                         <form action="{{ route('postRegister') }}" method="POST" class="signin-form">
                             @csrf
                             <div class="form-group">
