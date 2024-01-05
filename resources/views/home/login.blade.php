@@ -12,7 +12,7 @@
 	<link rel="stylesheet" href="{{asset('lg-assets')}}/css/style.css">
 
 	</head>
-	<body class="img js-fullheight" style="background-image: url({{asset('lg-assets')}}/images/bg.jpg);">
+	<body class="img js-fullheight" style="background-color:aqua;">
 	<section class="ftco-section">
 		<div class="container">
 			<div class="row justify-content-center">
@@ -21,6 +21,11 @@
 				</div>
 			</div>
 			<div class="row justify-content-center">
+
+				<div class="col-md-6 col-lg-4">
+					<div class="login-wrap p-0">
+                <a href="{{ route('register') }}" style="color: #fff"><h2 class="mb-4 text-center" style="color: #fff">Đăng nhập</h2>
+                </a>
                 <div class="row">
                     <div class="col-12">
                         @if (session('success'))
@@ -36,10 +41,6 @@
                         @endif
                     </div>
                 </div>
-				<div class="col-md-6 col-lg-4">
-					<div class="login-wrap p-0">
-                <a href="{{ route('register') }}" style="color: #fff"><h2 class="mb-4 text-center" style="color: #fff">Tạo tài khoản !</h2>
-                </a>
                 <form action="{{ route('postLogin') }}" method="POST" class="signin-form">
                     @csrf
 		      		<div class="form-group">

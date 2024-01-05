@@ -13,33 +13,13 @@
     <link rel="stylesheet" href="{{ asset('lg-assets') }}/css/style.css">
 </head>
 
-<body class="img js-fullheight" style="background-image: url({{ asset('lg-assets') }}/images/bg.jpg);">
+<body class="img js-fullheight" style="background-color:aqua;">
     <section class="ftco-section">
         <div class="container">
-            <!-- Hiển thị thông báo -->
-            @if (session('success'))
-                <div class="alert alert-success" role="alert">
-                    {{ session('success') }}
-                </div>
-            @endif
-
-            @if (session('error'))
-                <div class="alert alert-danger" role="alert">
-                    {{ session('error') }}
-                </div>
-            @endif
-
-            <div class="row justify-content-center">
-                <div class="col-md-6 text-center mb-5">
-                    <h2 class="heading-section">Đăng ký</h2>
-                </div>
-            </div>
             <div class="row justify-content-center">
                 <div class="col-md-6 col-lg-4">
-                    <a href="{{ route('login') }}" style="color: #fff"><h2 class="mb-4 text-center" style="color: #fff">Bạn đã có tài khoản</h2>
-                    </a>
                     <div class="login-wrap p-0">
-                        <h2 class="mb-4 text-center heading-section">Điền thông tin của bạn</h2>
+                        <h2 class="mb-4 text-center heading-section" >Đăng ký tài khoản !</h2>
                         <form action="{{ route('postRegister') }}" method="POST" class="signin-form">
                             @csrf
                             <div class="form-group">

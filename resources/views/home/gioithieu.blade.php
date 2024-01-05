@@ -31,7 +31,7 @@
           <div class="about-content">
             <h2 class="medium-title">GIỚI THIỆU VIỆC LÀM NGHỀ NGHIỆP</h2>
             <p class="desc">Chúng tôi là một đội ngũ nhiệt thành và giàu kinh nghiệm, luôn đề cao tinh thần tương thân tương ái không chỉ trong nội bộ công ty mà còn với cộng đồng toàn cầu, doanh nghiệp và các đối tác của chúng tôi. Chúng tôi luôn cố gắng vượt lên giới hạn của những nhiệm vụ trước mắt để nhìn nhận một bức tranh toàn cục hơn, đáp ứng các nhu cầu của khách hàng và cung cấp những giải pháp tạo nên sự khác biệt. Tinh thần sẵn sàng gánh vác trách nhiệm và thích nghi này chính là chìa khóa làm nên thành công của Kingston trên hành trình mở rộng khả năng tiếp cận các đối tác và khách hàng.</p>
-            <a href="#" class="btn btn-common">xem thêm</a>
+            <a href="#" class="btn btn-common">Liện hệ</a>
           </div>
         </div>
       </div>
@@ -99,76 +99,5 @@
       </div>
     </div>
   </section>
-  <!-- Service Main Section Ends -->
-
-  {{-- <!-- Testimonial Section Start -->
-  <section id="testimonial" class="section">
-    <div class="container">
-      <div class="row">
-        <div class="touch-slider" class="owl-carousel owl-theme">
-          <div class="item active text-center">
-            <img class="img-member" src="{{ asset('fe-assets') }}/assets/img/testimonial/img1.jpg" alt="">
-            <div class="client-info">
-             <h2 class="client-name">"John Smith  <span>(Project Menager)</span></h2>
-            </div>
-            <p><i class="fa fa-quote-left quote-left"></i> The team that was assigned to our project... were extremely professional <i class="fa fa-quote-right quote-right"></i><br> throughout the project and assured that the owner expectations were met and <br> often exceeded. </p>
-          </div>
-          <div class="item text-center">
-            <img class="img-member" src="{{ asset('fe-assets') }}/assets/img/testimonial/img2.jpg" alt="">
-            <div class="client-info">
-             <h2 class="client-name">"John Smith  <span>(Project Menager)</span></h2>
-            </div>
-            <p><i class="fa fa-quote-left quote-left"></i> The team that was assigned to our project... were extremely professional <i class="fa fa-quote-right quote-right"></i><br> throughout the project and assured that the owner expectations were met and <br> often exceeded. </p>
-          </div>
-          <div class="item text-center">
-            <img class="img-member" src="{{ asset('fe-assets') }}/assets/img/testimonial/img3.jpg" alt="">
-            <div class="client-info">
-              <h2 class="client-name">" Quan Ngyen <span>(Electricity Engineer)</span></h2>
-            </div>
-            <p><i class="fa fa-quote-left quote-left"></i> The team that was assigned to our project... were extremely professional <i class="fa fa-quote-right quote-right"></i><br> throughout the project and assured that the owner expectations were met and <br> often exceeded. </p>
-          </div>
-        </div>
-      </div>
-    </div>
-  </section>
-  <!-- Testimonial Section End --> --}}
-
-  <!-- Clients Section -->
-  <section class="clients section">
-    <div class="container">
-      <h2 class="section-title">
-        Clients & Partners
-      </h2>
-      <div class="row">
-        <div id="clients-scroller">
-          <div class="items">
-            <img src="{{ asset('fe-assets') }}/assets/img/clients/img1.png" alt="">
-          </div>
-          <div class="items">
-            <img src="{{ asset('fe-assets') }}/assets/img/clients/img2.png" alt="">
-          </div>
-          <div class="items">
-            <img src="{{ asset('fe-assets') }}/assets/img/clients/img3.png" alt="">
-          </div>
-          <div class="items">
-            <img src="{{ asset('fe-assets') }}/assets/img/clients/img4.png" alt="">
-          </div>
-          <div class="items">
-            <img src="{{ asset('fe-assets') }}/assets/img/clients/img5.png" alt="">
-          </div>
-          <div class="items">
-            <img src="{{ asset('fe-assets') }}/assets/img/clients/img6.png" alt="">
-          </div>
-          <div class="items">
-            <img src="{{ asset('fe-assets') }}/assets/img/clients/img6.png" alt="">
-          </div>
-          <div class="items">
-            <img src="{{ asset('fe-assets') }}/assets/img/clients/img6.png" alt="">
-          </div>
-        </div>
-      </div>
-    </div>
-  </section>
-  <!-- Client Section End -->
 
   @endsection
